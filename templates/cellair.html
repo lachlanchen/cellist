@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lazeal Cellist</title>
+  <!-- Bootstrap CSS -->
+  <link href="/statics/node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"></link>
+  <link href="/statics/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"></link>
+
+  <style>
+    /*#btn-first-row {
+      margin-top: 200;
+    }*/
+
+    #main-panel .col{
+      margin-right: 25px;
+      margin-left: 25;
+    }
+  </style>
+
+  
+
+<script src="/statics/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/statics/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/statics/node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
+<!-- <script src="/statics/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script> -->
+
+
+</head>
+
+<!-- <body oncontextmenu="return false;"> -->
+<body height="2000px">
+
+  <!-- navigation bar -->
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sql_inspector" aria-controls="navbar-toggler-hehuprofiler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img src="statics/logo/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Lazeal Cellist
+      </a>
+      <div class="collapse navbar-collapse" id="navbar-toggler-cellrehoboam">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/3d">Cellist3D</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Training Models</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Trained Models</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Nuclei</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Cytoplasm</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Membrane</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="" tabindex="-1" target="_blank">CellProfiler</a>
+          </li>
+        </ul>
+
+        
+
+        <form class="d-flex">
+          <input class="form-control me-2" id="input-username" data-label="username" type="search" placeholder="username" aria-label="Search">
+          <input class="form-control me-2" id="input-password" data-label="password" type="password" placeholder="password" aria-label="Search">
+          <button class="btn btn-outline-success" type="button" id="btn-login">Login</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  
+
+  <!-- main panel -->
+
+  <div id="main-panel" class="row justify-content-lg-center" style="margin-top: 5px;">
+
+    <!-- create model -->
+    <div class="col col-lg-4">
+      
+      <div class="card text-left" style="">
+        
+        <div class="card-header">
+          <i class="bi bi-sliders"></i>
+          Create Model
+        </div>
+
+
+        <div class="card-body" id="create-model">
+          <h5 class="card-title">Create a new model or update trained model, update its data, and refine it</h5>
+          <p class="card-text"><b>Model configurations</b></p>
+
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 120px;">
+                <span class="input-group-text">Model name</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="" placeholder="type a model name" class="form-control" id="input-model-name" data-label="model_name" data-regex="a-zA-Z0-9_" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 120px;">
+                <span class="input-group-text">Model id</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="" placeholder="null" class="form-control" id="input-model-id" data-label="model_id" data-regex="a-zA-Z0-9_" aria-label="Default" aria-describedby="inputGroup-sizing-default" disabled>
+            </div>
+          </div>
+
+          <!-- <p>点击<a href="http://192.168.11.142:1126/trained_models" target="_blank">`Trained Models`</a>查看训练好的模型</p> -->
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 120px;">
+                <span class="input-group-text"><b>Based on</b></span>
+              </div>
+
+              <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="" placeholder="model_id" class="form-control" id="input-based-on" data-label="based_on_model_id" data-regex="a-zA-Z0-9_"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              
+              <!-- <span class="input-group-text"><b>or</b></span> -->
+
+              <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" id="dropdown-select-algorithm" data-label="based_on_algorithm" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select algorithm</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Cellpose</a></li>
+                  <!-- <li><a class="dropdown-item" href="#">ThresholdBetterButter</a></li> -->
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <p class="card-text"><b>2D or 3D</b></p>
+          <div class="row" style="margin-top: 5px;">
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-rank-num" data-label="rank_num" id="flex-radio-rank-num1" checked>
+                <label class="form-check-label" for="flex-radio-rank-num1">
+                  2D
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-rank-num" data-label="rank_num" id="flex-radio-rank-num2" disabled>
+                <label class="form-check-label" for="flex-radio-rank-num2">
+                  3D
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <p class="card-text"><b>Object infomation</b></p>
+          <div class="row" style="margin-top: 5px;">
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-object-info" data-label="object_info" id="flex-radio-object-info1" checked>
+                <label class="form-check-label" for="flex-radio-object-info1">
+                  Nuclei
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-object-info" data-label="object_info" id="flex-radio-object-info2" disabled>
+                <label class="form-check-label" for="flex-radio-object-info2">
+                  Cytoplasm
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-object-info" data-label="object_info" id="flex-radio-object-info2" disabled>
+                <label class="form-check-label" for="flex-radio-object-info2">
+                  Membrane
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <p class="card-text"><b>Light</b></p>
+          <div class="row" style="margin-top: 5px;">
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-light-type" data-label="light_type" id="flex-radio-light-type1" checked>
+                <label class="form-check-label" for="flex-radio-light-type1">
+                  Fluroscent
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-light-type" data-label="light_type" id="flex-radio-light-type2" disabled>
+                <label class="form-check-label" for="flex-radio-light-type2">
+                  Brightfield
+                </label>
+              </div>
+            </div>
+            
+          </div>
+
+          <!-- <p class="card-text"><b>Image slice in pixel</b></p> -->
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Slice height</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="256" class="form-control" id="input-slice-height" data-label="slice_height" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default" disabled>
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Slice width</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="256" class="form-control" id="input-slice-width" data-label="slice_width" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default" disabled>
+            </div>
+          </div>
+
+
+          <!-- <p class="card-text"><b>Object size in pixel</b></p> -->
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Object min(px)</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="20" class="form-control" id="input-object-min" data-label="object_min" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Object max(px)</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="90" class="form-control" id="input-object-max" data-label="object_max" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+          </div>
+
+          <!-- <p class="card-text"><b>Image grid number</b></p> -->
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Height grid</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="8" class="form-control" id="input-height-grid" data-label="n_grid_height" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default" disabled>
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Width grid</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="8" class="form-control" id="input-width-grid" data-label="n_grid_width" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default" disabled>
+            </div>
+          </div>
+
+          <!-- <p class="card-text"><b>Maximum cell in grid compartment</b></p> -->
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Maximum in grid</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number 1, 2, 3 allowed" value="1" class="form-control" id="input-maximum-in-grid" data-label="maximum_in_grid" data-regex="1-3" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Total maximum</span>
+              </div>
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text" id="span-total-cell-number"></span>
+              </div>
+              
+
+            </div>
+          </div>
+
+          
+
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 70px;">
+                <span class="input-group-text">Images</span>
+              </div>
+
+              <div style="width: 70px;">
+                <input type="text" data-toggle="tooltip" title="project_id, only number allowed" value="" placeholder="project_id" class="form-control" id="input-project-id-imgsrv" data-label="imgsrv_project_id" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              </div>
+
+              <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" id="dropdown-channel" data-label="imgsrv_channel" type="button" data-bs-toggle="dropdown" aria-expanded="false">Channel</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">FITC</a></li>
+                  <li><a class="dropdown-item" href="#">PI</a></li>
+                  <li><a class="dropdown-item" href="#">TL 50</a></li>
+                </ul>
+              </div>
+
+              <span class="input-group-text"><b>or</b></span>
+              
+              <div style="width: 70px;">
+                <input type="text" data-toggle="tooltip" title="image_id, separated by comma" value="" placeholder="image_id, separated by comma" class="form-control" id="input-image-id" data-label="imgsrv_image_id" data-regex="0-9\," aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              </div>
+
+              <span class="input-group-text"><b>or</b></span>
+
+              <input id="input-local-images" data-label="local_images" class="form-control" type="file" multiple="multiple">
+            </div>
+          </div>
+
+
+          <!-- <p class="card-text"><b>Well infomation</b></p>
+
+          <p><i>Not available yet. </i></p> -->
+
+          <a href="#" class="btn btn-primary" id="btn-create-model" role="button" aria-disabled="true" style="margin-top: 5px;">Create Model</a>
+          <!-- <a href="#" class="btn btn-outline-primary" role="button" aria-disabled="true" style="margin-top: 5px;">Update</a>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>`Update`</b> 仅用于自定义模型更新数据</p> -->
+        </div>
+
+
+        <div class="card-footer text-muted">
+          
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- image area -->
+    <div class="col col-md-auto">
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="input-group mb-3">
+          <!-- <div class="input-group-prepend" style="width: 120px;">
+            <span class="input-group-text">Model id</span>
+          </div> -->
+          <!-- <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="lachlan_real_test_20220801_103936_872750" placeholder="model_id" class="form-control" id="input-load-model-id" data-label="load_model_id" data-regex="a-zA-Z0-9_" aria-label="Default" aria-describedby="inputGroup-sizing-default"> -->
+          <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="lachlan_wuwuwu_20230719_133546_743637" placeholder="model_id" class="form-control" id="input-load-model-id" data-label="load_model_id" data-regex="a-zA-Z0-9_" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          <a href="#" class="btn btn-primary" id="btn-load-model" role="button" aria-disabled="true">Load Model</a>
+        </div>
+      </div>
+        
+      <div style="margin-top: 100px; margin-bottom: 100px; margin-left: 100px; margin-right: 100px;">
+        <img id="img-target-image" image-uuid="04c40c96-ea8d-4ad6-a694-1516fad30328" data-label="target_image" src="/statics/images/rehoboam.jpg" style=" z-index: 0; width: 512px; height: 512px"/>
+      </div>
+
+    </div>
+
+
+    <!-- button area / toolbox -->
+
+    <div class="col col-md-auto">
+
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" id="dropdown-initialize-algorithm" data-label="initialize_algorithm" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select algorithm</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Cellpose</a></li>
+          <!-- <li><a class="dropdown-item" href="#">ThresholdBetterButter</a></li> -->
+        </ul>
+      </div>
+
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-primary" type="button" value="Initialize" id="btn-initialize"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-primary" type="button" value="Object Pretrain" id="btn-pretrain"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-danger" type="button" value="Pretrain Stop" id="btn-pretrain-stop"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-primary" type="button" value="Train" id="btn-train"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-danger" type="button" value="Stop" id="btn-train-stop"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-danger" type="button" value="Reset" id="btn-reset"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-info" type="button" value="Prev Image" id="btn-prev-image"/>
+      </div>
+      <div class="form-check form-switch">
+        <label class="form-check-label" for="flexSwitchCheckRefresh">Automatic</label>
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckRefresh">
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-info" type="button" value="Refresh Annotation" id="btn-update-annotation"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-info" type="button" value="Next Image" id="btn-next-image"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-success" type="button" value="Add a Rectangle" id="btn-add"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-warning" type="button" value="Delete Selected" id="btn-delete"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-danger" type="button" value="Clear All" id="btn-clear"/>
+      </div>
+      
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-primary" type="button" value="Update Model" id="btn-update-dataset"/>
+      </div>
+      
+
+    </div>    
+
+  </div>
+
+  <div class="modal" id="modal-error-message" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Error Message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I know</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="modal" id="modal-status-message" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I know</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- utilities -->
+  <script>
+  function sendFile(ws, file) {
+    ws.binaryType = "arraybuffer";
+    //ws.send('filename:'+file.name);
+    var reader = new FileReader();
+    var rawData = new ArrayBuffer();           
+    console.log(file.name);
+    reader.loadend = function() {
+    }
+    reader.onload = function(e) {
+        rawData = e.target.result;
+        ws.send(rawData);
+        console.log("the File has been transferred.")
+        //ws.send('end');
+    }
+    reader.readAsArrayBuffer(file);
+  }   
+
+  function popMsg(msg, error=false) {
+    let color;
+
+    if (error == true) {
+      color = "red";
+      modal_id = "modal-error-message";
+    } else if (error == false) {
+      color = "green";
+      modal_id = "modal-status-message";
+    } else {
+      console.log("Incorrect `error` code. ")
+    }
+
+    $('#'+ modal_id +' div div .modal-body').empty();
+    $('#'+ modal_id +' div div .modal-body').append('<p style="color: '+ color +'">' + msg + '<p>')
+    $('#'+ modal_id).modal('show');
+  }
+
+  function popError(msg) {
+    popMsg(msg, error=true)
+  }
+
+
+  function uuidv4() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    );
+  }
+
+  </script>
+
+
+
+
+  <!-- handle requests -->
+  <script>
+    var origin = window.location.origin;
+    var ws_uuid = "ws-" + uuidv4();
+    console.log("ws:"+origin.split("://")[1]+"/websocket/"+ws_uuid);
+
+    var ws;
+
+    function start_websocket() {
+        ws = new WebSocket("ws://" + origin.split("://")[1] + "/websocket/" + ws_uuid);
+
+        // ws.onmessage = ws_onmessage;
+
+        ws.onmessage = function (event) {
+          json_data = JSON.parse(event.data);
+          // console.log(json_data);
+          // popMsg(event.data, )
+
+          if (json_data["data_type"] == "create") {
+            $("#input-model-id").val(json_data["model_id"]);
+            $("#input-load-model-id").val(json_data["model_id"]);
+          }
+
+
+
+        }
+
+        ws.onopen = () => ws.send(
+          JSON.stringify({"data_type": "void"})
+        );
+
+        ws.onclose = function() {
+            // connection closed, discard old websocket and create a new one in 5s
+            ws = null;
+            setTimeout(start_websocket, 5000);
+        }
+    }
+
+    start_websocket();
+
+    // ws.send(JSON.stringify(canvasConfigAll));
+
+
+  </script>
+
+
+  <script>
+
+    // boostrap initialization
+
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    });
+
+    $(document).ready(function() {
+        $('.dropdown').each(function(key, dropdown) {
+            var $dropdown = $(dropdown);
+            $dropdown.find('.dropdown-menu a').on('click', function() {
+                $dropdown.find('button').text($(this).text());
+            });
+        });
+    });
+
+  </script>
+
+  <script>
+    targetObj = {
+      "local_images_uuid": [], 
+      "cursor": 0, 
+      "last_valid_cursor": 0, 
+      "target_image_id": "", 
+      "annotation": null
+    };
+    
+    targetProxy = new Proxy(targetObj, {
+      set: function (target, key, value) {
+          console.log(`${key} set to ${value}`);
+          target[key] = value;
+
+          // if(key == "image_path") {
+          //   $("#img-target-image").attr("src", value);
+          // }
+
+          if (key == "annotation") {
+            $("#img-target-image").attr("src", value["image_path"]);
+            $("#img-target-image").attr("iamge-uuid", value["image_id"]);
+
+            targetProxy["target_image_id"] = value["image_id"];
+
+            plot_annotation(target_image, value["z_where_inv"], value["z_pres"]);
+          }
+
+          return true;
+      }
+    });
+
+    // data = {"local_images_uuid": [], "cursor": 0};
+    input_legal = false;
+    error_msg = "Plz input a valid username, password and model_name. ";
+
+  </script>
+
+
+
+  <script>
+    // canvas utilities
+
+    var target_canvas,
+        target_image = document.getElementById('img-target-image'),
+        canvasConfigAll = {},
+        drag = false,
+
+        closeEnough = 5,
+        dragTL = dragBL = dragTR = dragBR = false;
+
+    function init(image, canvas) {
+
+        var canvasConfig, rectConfig, ctx;
+
+        canvas.addEventListener('mousedown', mouseDown, false);
+        canvas.addEventListener('mouseup', mouseUp, false);
+        canvas.addEventListener('mousemove', mouseMove, false);
+
+        image.addEventListener('mousedown', mouseDown, false);
+        image.addEventListener('mouseup', mouseUp, false);
+        image.addEventListener('mousemove', mouseMove, false);
+
+        canvasConfig = {
+          offsetLeft: canvas.offsetLeft,
+          offsetTop: canvas.offsetTop,
+          width: canvas.width,
+          height: canvas.height
+        };
+
+        canvasConfigAll[canvas.id] = canvasConfig;
+
+        rectConfig = {
+            startX: closeEnough,
+            startY: closeEnough,
+            w: canvas.width - closeEnough * 2,
+            h: canvas.height - closeEnough * 2
+        };
+
+        
+
+        ctx = canvas.getContext('2d');
+
+        draw(ctx, rectConfig);
+    }
+
+    function getConfig(cvs) {
+      var canvasConfig, rectConfig;
+
+      canvasConfig = {
+        width: cvs.width,
+        height: cvs.height,
+        offsetLeft: cvs.offsetLeft,
+        offsetTop: cvs.offsetTop
+      };
+
+      rectConfig = {
+        startX: closeEnough,
+        startY: closeEnough,
+        w: canvasConfig.width - closeEnough * 2,
+        h: canvasConfig.height - closeEnough * 2
+
+      };
+
+      return [canvasConfig,  rectConfig];
+    }
+
+    function mouseDown(e) {
+        var ctx, canvasConfig, rectConfig, canvas_all, mouseX, mouseY;
+
+        if (this.tagName == "CANVAS") {
+          target_canvas = $(this)[0];
+          ctx = target_canvas.getContext('2d');
+          [canvasConfig, rectConfig] = getConfig(target_canvas);
+
+          canvas_all = $(".canvas_rect");
+          for (i=0; i<canvas_all.length; i++) {
+            let cvs, c, rectCfg;
+
+            cvs = $(".canvas_rect")[i];
+            [_, rectCfg] = getConfig(cvs);
+            c = cvs.getContext('2d');
+            
+            c.clearRect(0, 0, cvs.width, cvs.height);
+            draw(c, rectCfg);
+          };
+
+        } else {
+          return;
+        }
+
+        mouseX = e.pageX - target_canvas.offsetLeft;
+        mouseY = e.pageY - target_canvas.offsetTop;
+
+
+        // if there isn't a rectConfig.yet
+        if (rectConfig.w === undefined) {
+            rectConfig.startX = closeEnough;
+            rectConfig.startY = closeEnough;
+            dragBR = true;
+        }
+        // if there is, check which corner
+        //   (if any) was clicked
+        //
+        // 4 cases:
+        // 1. top left
+        else if (checkCloseEnough(mouseX+closeEnough, rectConfig.startX) && checkCloseEnough(mouseY+closeEnough, rectConfig.startY)) {
+            dragTL = true;
+            $(this).draggable('disable');
+        }
+        // 2. top right
+        else if (checkCloseEnough(mouseX-closeEnough, rectConfig.startX + rectConfig.w) && checkCloseEnough(mouseY+closeEnough, rectConfig.startY)) {
+            dragTR = true;
+            $(this).draggable('disable');
+
+        }
+        // 3. bottom left
+        else if (checkCloseEnough(mouseX+closeEnough, rectConfig.startX) && checkCloseEnough(mouseY-closeEnough, rectConfig.startY + rectConfig.h)) {
+            dragBL = true;
+            $(this).draggable('disable');
+
+        }
+        // 4. bottom right
+        else if (checkCloseEnough(mouseX-closeEnough, rectConfig.startX + rectConfig.w) && checkCloseEnough(mouseY-closeEnough, rectConfig.startY + rectConfig.h)) {
+            dragBR = true;
+            $(this).draggable('disable');
+
+        }
+        // (5.) none of them
+        else {
+            // handle not resizing
+        }
+
+        ctx = target_canvas.getContext('2d');
+
+        // console.log(rectConfig);
+        ctx.clearRect(0, 0, target_canvas.width, target_canvas.height);
+        draw(ctx, rectConfig, color="#AA0000");
+
+    }
+
+    function checkCloseEnough(p1, p2) {
+        let is_close;
+
+        is_close = Math.abs(p1 - p2) < 2 * closeEnough;
+        return is_close;
+    }
+
+    function mouseUp(e) {
+        dragTL = dragTR = dragBL = dragBR = false;
+        $(target_canvas).draggable('enable');
+    }
+
+    function mouseMove(e) {
+        let mouseX, mouseY, canvasConfig, rectConfig;
+
+        if (target_canvas === undefined) {
+          return;
+        }
+        
+        mouseX = e.pageX - target_canvas.offsetLeft;
+        mouseY = e.pageY - target_canvas.offsetTop;
+        
+        canvasConfig = {
+          width: target_canvas.width,
+          height: target_canvas.height,
+          offsetLeft: target_canvas.offsetLeft,
+          offsetTop: target_canvas.offsetTop
+        }
+
+
+        rectConfig = {
+          startX: closeEnough,
+          startY: closeEnough,
+          w: canvasConfig.width - closeEnough * 2,
+          h: canvasConfig.height - closeEnough * 2
+
+        };
+
+        // console.log("current canvasConfig: ", canvasConfig);
+
+
+        if (dragTL) {
+            canvasConfig.width = canvasConfig.width - mouseX;
+            canvasConfig.height = canvasConfig.height - mouseY;
+            canvasConfig.offsetLeft = e.pageX;
+            canvasConfig.offsetTop = e.pageY;
+
+            rectConfig.w = canvasConfig.width - closeEnough * 2;
+            rectConfig.h = canvasConfig.height - closeEnough * 2;
+        } else if (dragTR) {
+            canvasConfig.width = Math.abs(mouseX);
+            canvasConfig.height = canvasConfig.height - mouseY;
+            // canvasConfig.offsetLeft = e.pageX - canvasConfig.width;
+            canvasConfig.offsetTop = e.pageY;
+
+            rectConfig.w = canvasConfig.width - closeEnough * 2;
+            rectConfig.h = canvasConfig.height - closeEnough * 2;
+
+        } else if (dragBL) {
+            canvasConfig.width = canvasConfig.width - mouseX;
+            canvasConfig.height = Math.abs(mouseY);
+            canvasConfig.offsetLeft = e.pageX;
+
+            rectConfig.w = canvasConfig.width - closeEnough * 2;
+            rectConfig.h = canvasConfig.height - closeEnough * 2;
+        } else if (dragBR) {
+            canvasConfig.width = Math.abs(mouseX);
+            canvasConfig.height = Math.abs(mouseY);
+
+            rectConfig.w = canvasConfig.width - closeEnough * 2;
+            rectConfig.h = canvasConfig.height - closeEnough * 2;
+        };
+
+        if (dragTL || dragTR || dragBR || dragBL) {
+          canvasConfigAll[target_canvas.id] = canvasConfig;
+          
+          $(target_canvas).attr("width", canvasConfig.width);
+          $(target_canvas).attr("height", canvasConfig.height);
+          $(target_canvas).css("left", canvasConfig.offsetLeft);
+          $(target_canvas).css("top", canvasConfig.offsetTop);
+
+          ctx = target_canvas.getContext('2d');
+
+          ctx.clearRect(0, 0, target_canvas.width, target_canvas.height);
+          draw(ctx, rectConfig);
+        } else {
+          // if not selected the corner, just update the canvasConfigAll
+          canvasConfigAll[target_canvas.id] = canvasConfig;
+        }
+    }
+
+    function draw(ctx, rectConfig, color="#AAAAAA") {
+        // console.log("color: ", color);
+        ctx.fillStyle = color;
+        ctx.fillRect(rectConfig.startX, rectConfig.startY, rectConfig.w, rectConfig.h);
+        drawHandles(ctx, rectConfig);
+    }
+
+    function drawHandles(ctx, rectConfig) {
+        drawCircle(ctx, rectConfig.startX, rectConfig.startY, closeEnough);
+        drawCircle(ctx, rectConfig.startX + rectConfig.w, rectConfig.startY, closeEnough);
+        drawCircle(ctx, rectConfig.startX + rectConfig.w, rectConfig.startY + rectConfig.h, closeEnough);
+        drawCircle(ctx, rectConfig.startX, rectConfig.startY + rectConfig.h, closeEnough);
+    }
+
+    function drawCircle(ctx, x, y, radius) {
+        ctx.fillStyle = "#00FF80";
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+
+    function clearAll() {
+      for (key in canvasConfigAll) {
+        $("#"+key).remove();
+      }
+    }
+
+
+    function z_where_to_canvas_config(image, z_where_inverse, z_pres) {
+      var config_all = [];
+
+      for (i=0; i<z_where_inverse.length; i++) {
+        if (z_pres[i] == 0) continue;
+
+        config_all.push({
+          width: z_where_inverse[i][0] * image.width + closeEnough*2,
+          height: z_where_inverse[i][1] * image.height + closeEnough*2,
+          offsetLeft: image.offsetLeft + ( -1 * z_where_inverse[i][0] + z_where_inverse[i][2] - (-1)) * image.width / 2 - closeEnough,
+          offsetTop: image.offsetTop + ( -1 * z_where_inverse[i][1] + z_where_inverse[i][3] - (-1)) * image.height / 2 - closeEnough
+        })
+      }
+
+      return config_all;
+    }
+
+    // function canvas_location_to_z_where(image, canvas_location) {
+    //   var z_where_inverse = [];
+
+    //   for (i=0; i<canvas_location.length; i++) {
+
+    //     z_where_inverse.push([
+    //       canvas_location[i].width / image.width,
+    //       canvas_location[i].height / image.height,
+    //       // image.offsetLeft + ( -1 * z_where_inverse[i][0] + z_where_inverse[i][2] - (-1)) * image.width / 2,
+    //       (canvas_location[i].offsetLeft - image.offsetLeft) * 2 / image.width + (-1) - (-1) * canvas_location[i].width / image.width,
+    //       // image.offsetTop + ( -1 * z_where_inverse[i][1] + z_where_inverse[i][3] - (-1)) * image.height / 2,
+    //       (canvas_location[i].offsetTop - image.offsetTop) * 2 / image.height + (-1) - (-1) * canvas_location[i].height / image.height,
+    //     ]);
+    //   }
+
+    //   return z_where_inverse;
+    // }
+
+
+    function canvas_config_to_z_where(image, canvas_config, ignore_outside=false) {
+      var z_where_inverse = [];
+
+      for (key in canvas_config) {
+
+        let sx = (canvas_config[key].width - closeEnough*2) / image.width,
+            sy = (canvas_config[key].height - closeEnough*2) / image.height,
+            x = (canvas_config[key].offsetLeft - image.offsetLeft + closeEnough) * 2 / image.width + (-1) - (-1) * sx,
+            y =(canvas_config[key].offsetTop - image.offsetTop + closeEnough) * 2 / image.height + (-1) - (-1) * sy;
+
+        if (!ignore_outside) {
+          z_where_inverse.push([
+            sx, sy, x, y
+          ]);
+        } else {
+          if (
+            canvas_config[key].offsetLeft + canvas_config[key].width <= image.offsetLeft || 
+            canvas_config[key].offsetTop + canvas_config[key].height <= image.offsetTop || 
+            canvas_config[key].offsetLeft >= image.offsetLeft + image.width ||
+            canvas_config[key].offsetTop >= image.offsetTop + image.height
+          ) {
+
+            console.log("Out of boundary, ignored! ")
+
+          } else {
+            z_where_inverse.push([
+              sx, sy, x, y
+            ]);
+          }
+        }
+      }
+
+      return z_where_inverse;
+    }
+
+
+    // var z_where_inverse, z_pres;
+    // z_where_inverse = [
+    //   [-1/3, -1/3, -0.3/3, -0.3/3],
+    //   [-1/8, -1/8, -1/8, -1/8],
+    //   [-1/5, -1/5, 1/5, 2/5]
+    // ];
+    // z_where_inverse = [
+    //   [1/7, 1/7, 0, 0],
+    //   [1/3, 1/5, 1/3, -2/5],
+    //   [1/8, 1/7, -1/8, -1/8],
+    //   [1/5, 1/6, 1/5, 2/5]
+    // ];
+    // z_where_inverse = [
+    //     [0.11741799116134644, 0.10604776442050934, -0.8937472701072693, -0.9517769813537598],
+    //     [0.12118002772331238, 0.1286913901567459, -0.74290931224823, -0.7612926363945007],
+    //     [0.15123461186885834, 0.1574222296476364, -0.27530011534690857, -0.8858147859573364],
+    //     [0.1205877959728241, 0.10273633897304535, -0.23924648761749268, -0.9338002800941467],
+    //     [0.11752871423959732, 0.1146736890077591, 0.20669102668762207, -0.9390245676040649],
+    //     [0.11922303587198257, 0.10849518328905106, 0.325043261051178, -0.9889178276062012],
+    //     [0.12123262137174606, 0.11676489561796188, 0.633243203163147, -0.9922882914543152],
+    //     [0.1501242071390152, 0.1703137308359146, 0.9190772771835327, -0.7634145021438599],
+    //     [0.11881544440984726, 0.12497036904096603, -0.7585932612419128, -0.7214354872703552],
+    //     [0.14708063006401062, 0.162234365940094, -0.7382243871688843, -0.7263489365577698],
+    //     [0.1173069030046463, 0.14101055264472961, -0.3407101333141327, -0.6872469782829285],
+    //     [0.11988650262355804, 0.12677256762981415, -0.02344442903995514, -0.7482989430427551],
+    //     [0.15153868496418, 0.1435883343219757, 0.15725944936275482, -0.6975868940353394],
+    //     [0.11790317296981812, 0.11955872178077698, 0.2867988348007202, -0.7027512788772583],
+    //     [0.1200365200638771, 0.1090136393904686, 0.5227669477462769, -0.5130528807640076],
+    //     [0.12549902498722076, 0.1352488100528717, 0.880497932434082, -0.7399215698242188],
+    //     [0.11721902340650558, 0.1291002631187439, -0.9997649192810059, -0.33905965089797974],
+    //     [0.12532828748226166, 0.13094475865364075, -0.5730404853820801, -0.2626987099647522],
+    //     [0.11732964962720871, 0.10107724368572235, -0.42855244874954224, -0.43473419547080994],
+    //     [0.14238296449184418, 0.15021337568759918, -0.15763260424137115, -0.2817138135433197],
+    //     [0.11977623403072357, 0.13950008153915405, 0.24315039813518524, -0.27514564990997314],
+    //     [0.13446509838104248, 0.14463265240192413, 0.2549704611301422, -0.27871134877204895],
+    //     [0.1360791176557541, 0.130715012550354, 0.6305966973304749, -0.43197154998779297],
+    //     [0.11724673211574554, 0.14269496500492096, 0.8410854935646057, -0.26268842816352844],
+    //     [0.11924959719181061, 0.12888853251934052, -0.9950090646743774, -0.04524990916252136],
+    //     [0.1385340541601181, 0.1485893428325653, -0.5735934972763062, -0.1887306571006775],
+    //     [0.12929347157478333, 0.11521179974079132, -0.43624168634414673, -0.20115824043750763],
+    //     [0.11973011493682861, 0.11993654817342758, -0.12074116617441177, -0.24053633213043213],
+    //     [0.11732291430234909, 0.11564863473176956, 0.029174968600273132, -0.08185985684394836],
+    //     [0.11880102753639221, 0.12033478170633316, 0.3699270188808441, -0.11048725992441177],
+    //     [0.1314765065908432, 0.13194018602371216, 0.7118470668792725, -0.11226418614387512],
+    //     [0.11936185508966446, 0.10554124414920807, 0.782248854637146, -0.0718970000743866],
+    //     [0.16212615370750427, 0.1712537556886673, -0.8231433033943176, 0.210651233792305],
+    //     [0.11908447742462158, 0.10156938433647156, -0.6015529036521912, 0.049092188477516174],
+    //     [0.15410216152668, 0.15090735256671906, -0.3136119544506073, 0.23263870179653168],
+    //     [0.11756527423858643, 0.13270269334316254, -0.09659808874130249, 0.19905173778533936],
+    //     [0.12328309565782547, 0.1243538036942482, 0.043428122997283936, 0.052008092403411865],
+    //     [0.12146539241075516, 0.14405034482479095, 0.49086064100265503, 0.011966586112976074],
+    //     [0.11981838941574097, 0.12269975244998932, 0.5173157453536987, 0.01503831148147583],
+    //     [0.13709771633148193, 0.13736887276172638, 0.857254683971405, 0.10550433397293091],
+    //     [0.11825085431337357, 0.12955822050571442, -0.8262383341789246, 0.2537597417831421],
+    //     [0.11827022582292557, 0.11971522867679596, -0.5363936424255371, 0.4781802296638489],
+    //     [0.12846757471561432, 0.1354416310787201, -0.29252752661705017, 0.2518816888332367],
+    //     [0.1180872693657875, 0.10679135471582413, -0.08206858485937119, 0.293151319026947],
+    //     [0.12612289190292358, 0.13321493566036224, 0.047679997980594635, 0.4941857159137726],
+    //     [0.1209268569946289, 0.12017801403999329, 0.25152286887168884, 0.4076295793056488],
+    //     [0.11723695695400238, 0.10692455619573593, 0.6923816204071045, 0.411020427942276],
+    //     [0.11950108408927917, 0.12884736061096191, 0.992765486240387, 0.2621760070323944],
+    //     [0.11951646208763123, 0.13322636485099792, -0.8004323244094849, 0.5676091909408569],
+    //     [0.23534135520458221, 0.2025715708732605, -0.6779975891113281, 0.5687658786773682],
+    //     [0.11846289783716202, 0.1364758163690567, -0.2797815799713135, 0.6788013577461243],
+    //     [0.1433219462633133, 0.15890876948833466, -0.22526532411575317, 0.6839485168457031],
+    //     [0.12443146854639053, 0.11973446607589722, 0.07723325490951538, 0.5074632167816162],
+    //     [0.1172025203704834, 0.10723806172609329, 0.41383832693099976, 0.7341437339782715],
+    //     [0.11804307252168655, 0.1412464827299118, 0.7295072078704834, 0.562815248966217],
+    //     [0.1915423721075058, 0.18198105692863464, 0.810501217842102, 0.6394314765930176],
+    //     [0.11728405952453613, 0.11080005019903183, -0.9400255084037781, 0.9832088351249695],
+    //     [0.11719416081905365, 0.09669004380702972, -0.667212724685669, 0.9824515581130981],
+    //     [0.11723010241985321, 0.11934766918420792, -0.30776673555374146, 0.7604653239250183],
+    //     [0.12169051170349121, 0.12725830078125, -0.04424156993627548, 0.981090784072876],
+    //     [0.12031237781047821, 0.12348753213882446, 0.04497481882572174, 0.9535198211669922],
+    //     [0.1311086118221283, 0.135208860039711, 0.36101529002189636, 0.8953419923782349],
+    //     [0.11912678182125092, 0.11441370844841003, 0.7001862525939941, 0.998221755027771],
+    //     [0.11752472072839737, 0.10235937684774399, 0.7785311937332153, 0.9839684963226318]
+    // ];
+
+    // // z_pres = [
+    // //   1, 1, 0, 1
+    // // ];
+    // z_pres = [
+    // 0.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0
+    // ];
+
+    function load_annotation(model_id, cursor) {
+      let form_data = new FormData();
+      form_data.append("model_id", model_id);
+      form_data.append("cursor", cursor);
+
+      $.ajax({
+        async: true,
+        url: 'load_model/'+ws_uuid,
+        type: 'POST',
+        data: form_data,
+        cache: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        success: function (response) {
+          // $("#target_image")
+
+          console.log(response);
+
+          let annotation = JSON.parse(response);
+
+          // targetProxy.image_path = annotation["image_path"];
+          // targetProxy.annotation = {"z_where_inv": annotation["z_where_inv"], "z_pres": annotation["z_pres"]};
+
+          if (annotation.status === true) {
+            targetProxy.annotation = annotation;
+            targetProxy.last_valid_cursor = annotation.cursor;
+            // popMsg(annotation["msg"], )
+          } else {
+            targetProxy.cursor = targetProxy.last_valid_cursor;
+            popError(annotation["error_msg"]);
+          }
+
+        }
+      });
+    }
+
+
+    function plot_annotation(target_image, z_where_inverse, z_pres) {
+      let canvas_all;
+      let canvas_location = z_where_to_canvas_config(target_image, z_where_inverse, z_pres);
+
+      clearAll();
+
+      // create canvas
+      for (i=0; i<canvas_location.length; i++) {
+        $(target_image).after('\
+          <canvas id="'+ 'canvas_rect' + i +'" class="canvas_rect" width="'+ canvas_location[i].width +'px" height="'+ canvas_location[i].height +'px" style="opacity: 0.5; left: '+ canvas_location[i].offsetLeft +'px; top: '+ canvas_location[i].offsetTop +'px; position: absolute;  z-index: '+ (i+1) +';"></canvas>'
+        );
+      }
+
+      // draw the rectangle inside the canvas
+      canvas_all = $(".canvas_rect");
+      for (i=0; i<canvas_all.length; i++) {
+        init(target_image, canvas_all[i]);
+        $(canvas_all[i]).draggable();
+      };
+
+    }
+      
+    // plot_annotation(target_image, z_where_inverse, z_pres);
+    
+    
+
+    $("#btn-create-model").click(function () {
+      if (!input_legal) {
+        popError(error_msg);
+        return;
+      }
+
+      ws.send(JSON.stringify(
+          {
+            "data_type": "create", 
+            "arguments": targetObj
+          }
+        ));
+
+      popMsg("Creating model...\n\n" + JSON.stringify(targetObj));
+
+    });
+
+
+
+    $("#btn-load-model").click(function () {
+
+      // ws.send(JSON.stringify({
+      //   "data_type": "load_model",
+      //   "model_id": targetProxy["load_model_id"]
+      // }));
+
+      targetProxy["cursor"] = 0;
+
+      let model_id = targetProxy["load_model_id"];
+      let cursor = targetProxy["cursor"];
+
+      load_annotation(model_id, cursor);
+
+    });
+
+    
+
+
+    $("#btn-prev-image").click(function () {
+
+      // ws.send(JSON.stringify({
+      //   "data_type": "load_model",
+      //   "model_id": targetProxy["load_model_id"]
+      // }));
+
+      targetProxy["cursor"]--;
+
+      targetProxy["cursor"] = targetProxy["cursor"] < 0 ? 0 : targetProxy["cursor"]
+
+      let model_id = targetProxy["load_model_id"];
+      let cursor = targetProxy["cursor"];
+
+      load_annotation(model_id, cursor);
+
+    });
+
+    $("#btn-update-annotation").click(function () {
+
+      // ws.send(JSON.stringify({
+      //   "data_type": "load_model",
+      //   "model_id": targetProxy["load_model_id"]
+      // }));
+
+
+      targetProxy["cursor"] = targetProxy["cursor"] < 0 ? 0 : targetProxy["cursor"]
+
+      let model_id = targetProxy["load_model_id"];
+      let cursor = targetProxy["cursor"];
+
+      load_annotation(model_id, cursor);
+
+    });
+
+    $("#btn-next-image").click(function () {
+
+      // ws.send(JSON.stringify({
+      //   "data_type": "load_model",
+      //   "model_id": targetProxy["load_model_id"]
+      // }));
+
+      targetProxy["cursor"]++;
+
+
+      let model_id = targetProxy["load_model_id"];
+      let cursor = targetProxy["cursor"];
+
+      load_annotation(model_id, cursor);
+
+    });
+
+    $("#btn-delete").click(function () {
+      $(target_canvas).remove();
+    });
+
+    $("#btn-clear").click(clearAll);
+
+    $("#btn-add").click(function () {
+      let last_canvas_idx;
+
+      if ($(target_image).next().length == 0) {
+        last_canvas_idx = 0;
+      } else {
+        last_canvas_idx = $(target_image).next().attr("id").split((/(\d+)/))[1];
+      }
+
+      // console.log(last_canvas_idx);
+      last_canvas_idx = parseInt(last_canvas_idx);
+
+      let i = last_canvas_idx + 1;
+      let canvas_id_new = "canvas_rect" + i;
+
+      $(target_image).after('\
+        <canvas id="'+ canvas_id_new +'" class="canvas_rect" width="'+ 50 +'px" height="'+ 50 +'px" style="opacity: 0.5; left: '+ (target_image.offsetLeft - 50) +'px; top: '+ (target_image.offsetTop - 50) +'px; position: absolute; z-index: '+ (i+1) +';"></canvas>'
+      );
+
+      let canvas = $("#"+canvas_id_new)[0];
+
+      // console.log(canvas);
+
+
+      init(target_image, canvas);
+      $(canvas).draggable();
+
+    });
+
+
+    $("#btn-initialize").click(function () {
+      if (!input_legal) {
+        popError(error_msg);
+        return;
+      }
+
+      ws.send(JSON.stringify(
+        {
+          "data_type": "initialize", 
+          "username": targetProxy["username"],
+          // "image_uuid": $(target_image).attr("image-uuid"),
+          // "image_uuid": targetProxy.annotation["image_id"],
+          "model_id": targetProxy["load_model_id"],
+          // "z_where": canvas_config_to_z_where(
+          //   target_image, canvasConfigAll, ignore_outside=true
+          // ),
+          "algorithm": "Cellpose",
+          "arguments": targetObj
+        }));
+      
+      });
+
+      // popMsg("Updating model...\n\n" + JSON.stringify(canvas_config_to_z_where(target_image, canvasConfigAll, ignore_outside=true)));
+
+
+    $("#btn-pretrain").click(function () {
+      if (!input_legal) {
+        popError(error_msg);
+        return;
+      }
+
+      ws.send(JSON.stringify(
+        {
+          "data_type": "pretrain", 
+          "username": targetProxy["username"],
+          // "image_uuid": $(target_image).attr("image-uuid"),
+          // "image_uuid": targetProxy.annotation["image_id"],
+          "model_id": targetProxy["load_model_id"],
+          // "z_where": canvas_config_to_z_where(
+          //   target_image, canvasConfigAll, ignore_outside=true
+          // ),
+          // "algorithm": "Cellpose",
+          "arguments": targetObj
+        })
+      );
+
+      // popMsg("Updating model...\n\n" + JSON.stringify(canvas_config_to_z_where(target_image, canvasConfigAll, ignore_outside=true)));
+
+    });
+
+    $("#btn-pretrain-stop").click(function () {
+      if (!input_legal) {
+        popError(error_msg);
+        return;
+      }
+
+      ws.send(JSON.stringify(
+        {
+          "data_type": "pretrain-stop", 
+          "username": targetProxy["username"],
+          // "image_uuid": $(target_image).attr("image-uuid"),
+          // "image_uuid": targetProxy.annotation["image_id"],
+          "model_id": targetProxy["load_model_id"],
+          // "z_where": canvas_config_to_z_where(
+          //   target_image, canvasConfigAll, ignore_outside=true
+          // ),
+          // "algorithm": "Cellpose",
+          "arguments": targetObj
+        })
+      );
+
+      // popMsg("Updating model...\n\n" + JSON.stringify(canvas_config_to_z_where(target_image, canvasConfigAll, ignore_outside=true)));
+
+    });
+
+
+    $("#btn-train").click(function () {
+      if (!input_legal) {
+        popError(error_msg);
+        return;
+      }
+
+      ws.send(JSON.stringify(
+        {
+          "data_type": "train", 
+          "username": targetProxy["username"],
+          // "image_uuid": $(target_image).attr("image-uuid"),
+          // "image_uuid": targetProxy.annotation["image_id"],
+          "model_id": targetProxy["load_model_id"],
+          // "z_where": canvas_config_to_z_where(
+          //   target_image, canvasConfigAll, ignore_outside=true
+          // ),
+          // "algorithm": "Cellpose",
+          "arguments": targetObj
+        })
+      );
+
+      // popMsg("Updating model...\n\n" + JSON.stringify(canvas_config_to_z_where(target_image, canvasConfigAll, ignore_outside=true)));
+
+    });
+
+    
+    $("#btn-train-stop").click(function () {
+      if (!input_legal) {
+        popError(error_msg);
+        return;
+      }
+
+      ws.send(JSON.stringify(
+        {
+          "data_type": "train-stop", 
+          "username": targetProxy["username"],
+          // "image_uuid": $(target_image).attr("image-uuid"),
+          // "image_uuid": targetProxy.annotation["image_id"],
+          "model_id": targetProxy["load_model_id"],
+          // "z_where": canvas_config_to_z_where(
+          //   target_image, canvasConfigAll, ignore_outside=true
+          // ),
+          // "algorithm": "Cellpose",
+          "arguments": targetObj
+        })
+      );
+
+      // popMsg("Updating model...\n\n" + JSON.stringify(canvas_config_to_z_where(target_image, canvasConfigAll, ignore_outside=true)));
+
+    });
+
+    $("#btn-reset").click(function () {
+      if (!input_legal) {
+        popError(error_msg);
+        return;
+      }
+
+      ws.send(JSON.stringify(
+        {
+          "data_type": "reset", 
+          "username": targetProxy["username"],
+          // "image_uuid": $(target_image).attr("image-uuid"),
+          // "image_uuid": targetProxy.annotation["image_id"],
+          "model_id": targetProxy["load_model_id"],
+          // "z_where": canvas_config_to_z_where(
+          //   target_image, canvasConfigAll, ignore_outside=true
+          // ),
+          // "algorithm": "Cellpose",
+          "arguments": targetObj
+        })
+      );
+
+      // popMsg("Updating model...\n\n" + JSON.stringify(canvas_config_to_z_where(target_image, canvasConfigAll, ignore_outside=true)));
+
+    });
+
+
+    $("#btn-update-dataset").click(function () {
+      if (!input_legal) {
+        popError(error_msg);
+        return;
+      }
+
+      ws.send(JSON.stringify(
+        {
+          "data_type": "update", 
+          "username": targetProxy["username"],
+          // "image_uuid": $(target_image).attr("image-uuid"),
+          "image_uuid": targetProxy.annotation["image_id"],
+          "model_id": targetProxy["load_model_id"],
+          "z_where": canvas_config_to_z_where(
+            target_image, canvasConfigAll, ignore_outside=true
+          ),
+          "arguments": targetObj
+        })
+      );
+
+      popMsg("Updating model...\n\n" + JSON.stringify(canvas_config_to_z_where(target_image, canvasConfigAll, ignore_outside=true)));
+
+    });
+
+
+
+
+
+  </script>
+
+  
+
+
+  <script>
+    
+
+    $("input[type=text]").each(function (event) {
+      // regex update
+      let regex = new RegExp('[^'+$(this).attr("data-regex")+']', 'g');
+      $(this).val($(this).val().trim().replaceAll(" ", "").replaceAll(regex, ''));
+
+      targetProxy[$(this).attr("data-label")] = /^[\d\-]+$/.test($(this).attr("data-regex")) ? parseInt($(this).val().trim()) : $(this).val().trim();
+
+      // update total numbers
+      $('#span-total-cell-number').text(
+        targetProxy['n_grid_height'] + 'x' + targetProxy['n_grid_width'] + 'x' + targetProxy['maximum_in_grid'] + '=' + targetProxy['n_grid_height'] * targetProxy['n_grid_width'] * targetProxy['maximum_in_grid'] + ' cells'
+      );
+
+    });
+
+    $("input[type=search], input[type=password]").each(function (event) {
+      // regex update
+      
+      targetProxy[$(this).attr("data-label")] = $(this).val().trim();
+
+
+    });
+
+    $("input[type=file]").each(function (event) {
+      targetProxy[$(this).attr("data-label")] = [];
+    });
+
+    // $("button").each(function (event) {
+    //   targetProxy[this.id] = $(this).val();
+    // });
+
+    $('input[name^="flex-radio"]').each(function() {
+      
+      targetProxy[$(this).attr("data-label")] = [];
+      
+      $('input[name="'+ this.name +'"]').each(function (index) {
+        
+        if ($(this).prop("checked"))
+          targetProxy[$(this).attr("data-label")].push($('[for='+ this.id +']').text().trim());  
+      });
+      
+    });
+
+    $('button[data-bs-toggle=dropdown]').each(function() {
+      // targetProxy[$(this).attr("data-label")] = $(this).text().trim();
+      targetProxy[$(this).attr("data-label")] = "";
+    });
+
+    $("input[type=text]").change(function (event) {
+
+      input_legal = false;
+      error_msg = "";
+
+      // regex update
+      let regex = new RegExp('[^'+$(this).attr("data-regex")+']', 'g');
+      $(this).val($(this).val().trim().replaceAll(" ", "").replaceAll(regex, ''));
+
+      targetProxy[$(this).attr("data-label")] = /^[\d\-]+$/.test($(this).attr("data-regex")) ? parseInt($(this).val().trim()) : $(this).val().trim();
+
+      if (targetProxy["username"] === "") {
+        error_msg = "Login first. "
+        popError(error_msg);
+        return
+      }
+
+
+      if (targetProxy["model_name"] == "") {
+        error_msg = "model_name cannot be empty. "
+        popError(error_msg);
+        return
+      }
+
+      if (targetProxy["object_min"] < 10) {
+        $(this).val(10);
+        targetProxy["object_min"] = 10;
+        popError("Object minimun should be larger than 10, resize image otherwise. ");
+      }
+
+      if (targetProxy["object_max"] > 100) {
+        $(this).val(100);
+        targetProxy["object_max"] = 100;
+        popError("Object maximum should be less than 100, resize image otherwise. ");
+      }
+      
+      // object_min should be less than object_max
+      if (targetProxy["object_min"] > targetProxy["object_max"]) {
+
+        if ($(this).attr("data-label") == "object_min") {
+          $(this).val(targetProxy["object_max"]);
+          targetProxy["object_min"] = targetProxy["object_max"];
+        } else {
+          $(this).val(targetProxy["object_min"]);
+          targetProxy["object_max"] = targetProxy["object_min"];
+        }
+      }
+
+      if (targetProxy["maximum_in_grid"] > 3) {
+        $(this).val(3);
+        targetProxy["maximum_in_grid"] = 3;
+        popError("Maximum in grid should be less than 3. ")
+      }
+
+      if (targetProxy["maximum_in_grid"] < 1) {
+        $(this).val(1);
+        targetProxy["maximum_in_grid"] = 1;
+        popError("Maximum in grid should be larger than 1. ")
+      }
+
+      // update total numbers
+      $('#span-total-cell-number').text(
+        targetProxy['n_grid_height'] + 'x' + targetProxy['n_grid_width'] + 'x' + targetProxy['maximum_in_grid'] + '=' + targetProxy['n_grid_height'] * targetProxy['n_grid_width'] * targetProxy['maximum_in_grid'] + ' cells'
+      );
+
+      input_legal = true;
+    });
+
+
+    $("input[type=search], input[type=password]").change(function (event) {
+
+      targetProxy[$(this).attr("data-label")] = $(this).val().trim();
+
+    });
+
+
+    $("input[type=file]").change(function (event) {
+      
+
+      let files=  []; 
+      let form_data = new FormData();
+
+      console.log($(this)[0].files.length);
+
+      for (i=0; i<$(this)[0].files.length; i++) {
+        if ( !/(jpg|gif|png|JPG|GIF|PNG|JPEG|jpeg|tif|TIF)$/.test( $(this)[0].files[i].name ) ) {
+          
+          $(this).val("");
+          let msg = "Unrecognized image type, plz choose images with extension `tif`, `png`, `jpg`";
+          popError(msg, )          
+
+          return;
+        }
+
+        file_uuid = uuidv4();
+        files.push(file_uuid); //+'@'+$(this)[0].files[i].name;
+
+        console.log("Append image "+file_uuid);
+        form_data.append(file_uuid, $(this)[0].files[i]);
+      }
+
+      targetProxy[$(this).attr("data-label")] = $(this)[0].files;
+      targetProxy[$(this).attr("data-label") + "_uuid"] = files;
+
+      $.ajax({
+        async: true,
+        url: 'upload/'+ws_uuid,
+        type: 'POST',
+        data: form_data,
+        cache: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        processData: false,
+        success: function (response) {
+          // popMsg(response["msg"], )
+        }
+      });
+
+    });
+
+    $('input[name^="flex-radio"]').change(function() {
+      
+      targetProxy[$(this).attr("data-label")] = [];
+      
+      $('input[name="'+ this.name +'"]').each(function (index) {
+          if ($(this).prop("checked"))
+          targetProxy[$(this).attr("data-label")].push($('[for='+ this.id +']').text().trim());  
+
+        });
+      
+    });
+
+    // $('button[data-bs-toggle=dropdown]').mousemove(function() {
+    //   console.log("dropdown changed");
+    //   targetProxy[this.id] = $(this).text().trim();
+    // });
+
+    $("div.dropdown .dropdown-menu .dropdown-item").click(function () {
+      // console.log($("button", $(this).parent().parent().parent()).attr("id"), $(this).text().trim());
+      targetProxy[$("button", $(this).parent().parent().parent()).attr("data-label")] = $(this).text().trim();
+    });
+
+    // $('#input-local-images').fileupload();
+
+
+    $("#btn-login").click(function (event) {
+      input_legal = false;
+      error_msg = "";
+
+      $("#input-username").prop("disabled", true);
+      $("#input-password").prop("disabled", true);
+      $("#btn-login").prop("disabled", true);
+
+      if (targetProxy["username"] == "admin" && targetProxy["password"] == "admin") {
+        // popMsg("Login correctly. ", )
+        // popMsg("Login successfully. ", )
+        
+      } else if (targetProxy["username"] == "lachlan" && targetProxy["password"] == "lachlan") {
+        // popMsg("Login correctly. ", )
+        // popMsg("Login successfully. ", )
+        
+      } else if (targetProxy["username"] == "yanjun" && targetProxy["password"] == "yanjun") {
+        // popMsg("Login correctly. ", )
+        // popMsg("Login successfully. ", )
+        
+      } else{
+        error_msg = "Username or password are not correct. "
+        popError(error_msg);
+        return;
+      }
+
+      input_legal = true;
+
+    })
+
+  </script>
+
+  <script>
+    $("#btn-load-model").click();
+    setInterval(function () {
+      if ($("#flexSwitchCheckRefresh").prop("checked")) {
+        targetProxy["cursor"] = targetProxy["cursor"] < 0 ? 0 : targetProxy["cursor"]
+
+        let model_id = targetProxy["load_model_id"];
+        let cursor = targetProxy["cursor"];
+
+        load_annotation(model_id, cursor);
+
+      }
+    }, 5000);
+  </script>
+
+
+</body>
+</html>

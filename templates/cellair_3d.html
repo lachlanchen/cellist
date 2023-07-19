@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lazeal Cellist</title>
+  <!-- Bootstrap CSS -->
+  <link href="/statics/node_modules/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet"></link>
+  <link href="/statics/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"></link>
+
+  <style>
+    /*#btn-first-row {
+      margin-top: 200;
+    }*/
+
+    #main-panel .col{
+      margin-right: 25px;
+      margin-left: 25;
+    }
+  </style>
+
+  
+
+<script src="/statics/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/statics/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/statics/node_modules/jquery-ui-dist/jquery-ui.min.js"></script>
+<!-- <script src="/statics/node_modules/blueimp-file-upload/js/jquery.fileupload.js"></script> -->
+
+
+</head>
+
+<!-- <body oncontextmenu="return false;"> -->
+<body height="2000px">
+
+  <!-- navigation bar -->
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sql_inspector" aria-controls="navbar-toggler-hehuprofiler" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img src="statics/logo/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        Lazeal Cellist3D
+      </a>
+      <div class="collapse navbar-collapse" id="navbar-toggler-cellrehoboam">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Cellist2D</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Training Models</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Trained Models</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Nuclei</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Cytoplasm</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Membrane</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://192.168.11.135:1125" tabindex="-1" target="_blank">JiFuProfiler</a>
+          </li>
+        </ul>
+
+        
+
+        <form class="d-flex">
+          <input class="form-control me-2" id="input-username" data-label="username" type="search" placeholder="username" aria-label="Search">
+          <input class="form-control me-2" id="input-password" data-label="password" type="password" placeholder="password" aria-label="Search">
+          <button class="btn btn-outline-success" type="button" id="btn-login">Login</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  
+
+  <!-- main panel -->
+
+  <div id="main-panel" class="row justify-content-lg-center" style="margin-top: 5px;">
+
+    <!-- create model -->
+    <div class="col col-lg-4">
+      
+      <div class="card text-left" style="">
+        
+        <div class="card-header">
+          <i class="bi bi-sliders"></i>
+          Create Model
+        </div>
+
+
+        <div class="card-body" id="create-model">
+          <h5 class="card-title">Create a new model or update trained model, update its data, and refine it</h5>
+          <p class="card-text"><b>Model configurations</b></p>
+
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 120px;">
+                <span class="input-group-text">Model name</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="" placeholder="type a model name" class="form-control" id="input-model-name" data-label="model_name" data-regex="a-zA-Z0-9_" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 120px;">
+                <span class="input-group-text">Model id</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="" placeholder="null" class="form-control" id="input-model-id" data-label="model_id" data-regex="a-zA-Z0-9_" aria-label="Default" aria-describedby="inputGroup-sizing-default" disabled>
+            </div>
+          </div>
+
+          <!-- <p>点击<a href="http://192.168.11.142:1126/trained_models" target="_blank">`Trained Models`</a>查看训练好的模型</p> -->
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 120px;">
+                <span class="input-group-text"><b>Based on</b></span>
+              </div>
+
+              <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="" placeholder="model_id" class="form-control" id="input-based-on" data-label="based_on" data-regex="a-zA-Z0-9_"  aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              
+              <span class="input-group-text"><b>or</b></span>
+
+              <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" id="dropdown-select-trained" data-label="select_trained" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select trained</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">hhhhhhhhhhhh</a></li>
+                  <li><a class="dropdown-item" href="#">hahahahahaha</a></li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <p class="card-text"><b>2D or 3D</b></p>
+          <div class="row" style="margin-top: 5px;">
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-rank-num" data-label="rank_num" id="flex-radio-rank-num1" checked>
+                <label class="form-check-label" for="flex-radio-rank-num1">
+                  2D
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-rank-num" data-label="rank_num" id="flex-radio-rank-num2">
+                <label class="form-check-label" for="flex-radio-rank-num2">
+                  3D
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <p class="card-text"><b>Object infomation</b></p>
+          <div class="row" style="margin-top: 5px;">
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-object-info" data-label="object_info" id="flex-radio-object-info1" checked>
+                <label class="form-check-label" for="flex-radio-object-info1">
+                  Nuclei
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-object-info" data-label="object_info" id="flex-radio-object-info2" disabled>
+                <label class="form-check-label" for="flex-radio-object-info2">
+                  Cytoplasm
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-object-info" data-label="object_info" id="flex-radio-object-info2" disabled>
+                <label class="form-check-label" for="flex-radio-object-info2">
+                  Membrane
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <p class="card-text"><b>Light</b></p>
+          <div class="row" style="margin-top: 5px;">
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-light-type" data-label="light_type" id="flex-radio-light-type1" checked>
+                <label class="form-check-label" for="flex-radio-light-type1">
+                  Fluroscent
+                </label>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="flex-radio-light-type" data-label="light_type" id="flex-radio-light-type2" disabled>
+                <label class="form-check-label" for="flex-radio-light-type2">
+                  Brightfield
+                </label>
+              </div>
+            </div>
+            
+          </div>
+
+          <!-- <p class="card-text"><b>Image slice in pixel</b></p> -->
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Slice height</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="256" class="form-control" id="input-slice-height" data-label="slice_height" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default" disabled>
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Slice width</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="256" class="form-control" id="input-slice-height" data-label="slice_height" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default" disabled>
+            </div>
+          </div>
+
+
+          <!-- <p class="card-text"><b>Object size in pixel</b></p> -->
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Object min(px)</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="20" class="form-control" id="input-object-min" data-label="object_min" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Object max(px)</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="90" class="form-control" id="input-object-max" data-label="object_max" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+          </div>
+
+          <!-- <p class="card-text"><b>Image grid number</b></p> -->
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Height grid</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="8" class="form-control" id="input-height-grid" data-label="height_grid" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Width grid</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number allowed" value="8" class="form-control" id="input-width-grid" data-label="width_grid" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+            </div>
+          </div>
+
+          <!-- <p class="card-text"><b>Maximum cell in grid compartment</b></p> -->
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Maximum in grid</span>
+              </div>
+              <input type="text" data-toggle="tooltip" title="only number 1, 2, 3 allowed" value="1" class="form-control" id="input-maximum-in-grid" data-label="maximum_in_grid" data-regex="1-3" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text">Total maximum</span>
+              </div>
+              <div class="input-group-prepend" style="width: 150px;">
+                <span class="input-group-text" id="span-total-cell-number"></span>
+              </div>
+              
+
+            </div>
+          </div>
+
+          
+
+          <div class="row" style="margin-top: 5px;">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend" style="width: 70px;">
+                <span class="input-group-text">Images</span>
+              </div>
+
+              <div style="width: 70px;">
+                <input type="text" data-toggle="tooltip" title="project_id, only number allowed" value="" placeholder="project_id" class="form-control" id="input-project-id-imgsrv" data-label="project_id_imgsrv" data-regex="0-9" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              </div>
+
+              <div class="dropdown">
+                <button class="btn btn-outline-secondary dropdown-toggle" id="dropdown-channel" data-label="channel" type="button" data-bs-toggle="dropdown" aria-expanded="false">Channel</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">FITC</a></li>
+                  <li><a class="dropdown-item" href="#">PI</a></li>
+                  <li><a class="dropdown-item" href="#">TL 50</a></li>
+                </ul>
+              </div>
+
+              <span class="input-group-text"><b>or</b></span>
+              
+              <div style="width: 70px;">
+                <input type="text" data-toggle="tooltip" title="image_id, separated by comma" value="" placeholder="image_id, separated by comma" class="form-control" id="input-image-id" data-label="image_id" data-regex="0-9\," aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              </div>
+
+              <span class="input-group-text"><b>or</b></span>
+
+              <input id="input-local-images" data-label="local_images" class="form-control" type="file" multiple="multiple">
+            </div>
+          </div>
+
+
+          <!-- <p class="card-text"><b>Well infomation</b></p>
+
+          <p><i>Not available yet. </i></p> -->
+
+          <a href="#" class="btn btn-primary" id="btn-create-model" role="button" aria-disabled="true" style="margin-top: 5px;">Create Model</a>
+          <!-- <a href="#" class="btn btn-outline-primary" role="button" aria-disabled="true" style="margin-top: 5px;">Update</a>
+          <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>`Update`</b> 仅用于自定义模型更新数据</p> -->
+        </div>
+
+
+        <div class="card-footer text-muted">
+          
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- image area -->
+    <div class="col col-lg-4">
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="input-group mb-3">
+          <!-- <div class="input-group-prepend" style="width: 120px;">
+            <span class="input-group-text">Model id</span>
+          </div> -->
+          <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="" placeholder="model_id" class="form-control" id="input-load-model-id" data-label="load_model_id" data-regex="a-zA-Z0-9_" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          <a href="#" class="btn btn-primary" id="btn-load-model" role="button" aria-disabled="true">Load Model</a>
+        </div>
+      </div>
+        
+      <div style="">
+        <!-- <img id="img-target-image" image-uuid="04c40c96-ea8d-4ad6-a694-1516fad30328" data-label="target_image" src="/statics/images/0.png" style=" z-index: 0; width: 512px; height: 512px"/> -->
+
+
+        <div class="row">
+          <div class="col">
+            <h2>Random Angle</h2>
+            <img id="img-target-image-random" image-uuid="04c40c96-ea8d-4ad6-a694-1516fad30328" data-label="target_image" src="/statics/images/0.png" style=" z-index: 0; width: 256px; height: 256px"/>
+          </div>
+          <div class="col">
+            <h2>XY</h2>
+            <img id="img-target-image-xy" image-uuid="04c40c96-ea8d-4ad6-a694-1516fad30328" data-label="target_image" src="/statics/images/0.png" style=" z-index: 0; width: 256px; height: 256px"/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <h2>XZ</h2>
+            <img id="img-target-image-xz" image-uuid="04c40c96-ea8d-4ad6-a694-1516fad30328" data-label="target_image" src="/statics/images/0.png" style=" z-index: 0; width: 256px; height: 256px"/>
+          </div>
+          <div class="col">
+            <h2>YZ</h2>
+            <img id="img-target-image-yz" image-uuid="04c40c96-ea8d-4ad6-a694-1516fad30328" data-label="target_image" src="/statics/images/0.png" style=" z-index: 0; width: 256px; height: 256px"/>
+          </div>
+        </div>
+
+
+        
+        
+        
+        
+      </div>
+
+    </div>
+
+
+    <!-- button area / toolbox -->
+
+    <div class="col col-md-auto" style="margin-top: 100px;">
+
+      <div id="container" style="width: 10%">
+        
+      </div>
+
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-primary" type="button" value="Prev Image" id="btn-prev-image"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-primary" type="button" value="Next Image" id="btn-next-image"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-success" type="button" value="Add a Rectangle" id="btn-add"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-warning" type="button" value="Delete Selected" id="btn-delete"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-danger" type="button" value="Clear All" id="btn-clear"/>
+      </div>
+      <div class="row justify-content-md-start" style="margin-top: 10px">
+        <input class="btn btn-outline-primary" type="button" value="Update Model" id="btn-update"/>
+      </div>
+
+    </div>    
+
+  </div>
+
+  <div class="modal" id="modal-error-message" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Error Message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I know</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class="modal" id="modal-status-message" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">I know</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+ 
+
+  <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "/statics/node_modules/three/build/three.module.js"
+      }
+    }
+  </script>
+
+  <script type="module">
+
+      import * as THREE from 'three';
+      import { BoxLineGeometry } from '/statics/node_modules/three/examples/jsm/geometries/BoxLineGeometry.js';
+      import { VRButton } from '/statics/node_modules/three/examples/jsm/webxr/VRButton.js';
+      import { XRControllerModelFactory } from '/statics/node_modules/three/examples/jsm/webxr/XRControllerModelFactory.js';
+
+      const clock = new THREE.Clock();
+
+      let container;
+      let camera, scene, raycaster, renderer;
+
+      let room;
+
+      let controller, controllerGrip;
+      let INTERSECTED;
+      const tempMatrix = new THREE.Matrix4();
+
+      init();
+      animate();
+
+      function init() {
+
+        container = document.getElementById( 'container' );
+        // document.body.appendChild( container );
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color( 0x505050 );
+
+        camera = new THREE.PerspectiveCamera( 70, 256 / 256, 0.1, 10 );
+        camera.position.set( 0, 1.6, 3 );
+        scene.add( camera );
+
+        room = new THREE.LineSegments(
+          new BoxLineGeometry( 6, 6, 6, 10, 10, 10 ).translate( 0, 3, 0 ),
+          new THREE.LineBasicMaterial( { color: 0x808080 } )
+        );
+        scene.add( room );
+
+        scene.add( new THREE.HemisphereLight( 0x606060, 0x404040 ) );
+
+        const light = new THREE.DirectionalLight( 0xffffff );
+        light.position.set( 1, 1, 1 ).normalize();
+        scene.add( light );
+
+        const geometry = new THREE.BoxGeometry( 0.15, 0.15, 0.15 );
+
+        for ( let i = 0; i < 200; i ++ ) {
+
+          const object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
+
+          object.position.x = Math.random() * 4 - 2;
+          object.position.y = Math.random() * 4;
+          object.position.z = Math.random() * 4 - 2;
+
+          object.rotation.x = Math.random() * 2 * Math.PI;
+          object.rotation.y = Math.random() * 2 * Math.PI;
+          object.rotation.z = Math.random() * 2 * Math.PI;
+
+          object.scale.x = Math.random() + 0.5;
+          object.scale.y = Math.random() + 0.5;
+          object.scale.z = Math.random() + 0.5;
+
+          object.userData.velocity = new THREE.Vector3();
+          object.userData.velocity.x = Math.random() * 0.01 - 0.005;
+          object.userData.velocity.y = Math.random() * 0.01 - 0.005;
+          object.userData.velocity.z = Math.random() * 0.01 - 0.005;
+
+          room.add( object );
+
+        }
+
+        raycaster = new THREE.Raycaster();
+
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        // renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setPixelRatio( 1 );
+        // renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( 256, 256 );
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        renderer.xr.enabled = true;
+        container.appendChild( renderer.domElement );
+
+        //
+
+        function onSelectStart() {
+
+          this.userData.isSelecting = true;
+
+        }
+
+        function onSelectEnd() {
+
+          this.userData.isSelecting = false;
+
+        }
+
+        controller = renderer.xr.getController( 0 );
+        controller.addEventListener( 'selectstart', onSelectStart );
+        controller.addEventListener( 'selectend', onSelectEnd );
+        controller.addEventListener( 'connected', function ( event ) {
+
+          this.add( buildController( event.data ) );
+
+        } );
+        controller.addEventListener( 'disconnected', function () {
+
+          this.remove( this.children[ 0 ] );
+
+        } );
+        scene.add( controller );
+
+        const controllerModelFactory = new XRControllerModelFactory();
+
+        controllerGrip = renderer.xr.getControllerGrip( 0 );
+        controllerGrip.add( controllerModelFactory.createControllerModel( controllerGrip ) );
+        scene.add( controllerGrip );
+
+        window.addEventListener( 'resize', onWindowResize );
+
+        //
+
+        document.body.appendChild( VRButton.createButton( renderer ) );
+
+      }
+
+      function buildController( data ) {
+
+        let geometry, material;
+
+        switch ( data.targetRayMode ) {
+
+          case 'tracked-pointer':
+
+            geometry = new THREE.BufferGeometry();
+            geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( [ 0, 0, 0, 0, 0, - 1 ], 3 ) );
+            geometry.setAttribute( 'color', new THREE.Float32BufferAttribute( [ 0.5, 0.5, 0.5, 0, 0, 0 ], 3 ) );
+
+            material = new THREE.LineBasicMaterial( { vertexColors: true, blending: THREE.AdditiveBlending } );
+
+            return new THREE.Line( geometry, material );
+
+          case 'gaze':
+
+            geometry = new THREE.RingGeometry( 0.02, 0.04, 32 ).translate( 0, 0, - 1 );
+            material = new THREE.MeshBasicMaterial( { opacity: 0.5, transparent: true } );
+            return new THREE.Mesh( geometry, material );
+
+        }
+
+      }
+
+      function onWindowResize() {
+
+        // camera.aspect = window.innerWidth / window.innerHeight;
+        // camera.updateProjectionMatrix();
+
+        // renderer.setSize( window.innerWidth, window.innerHeight );
+
+        camera.aspect = 256 / 256;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( 256, 256 );
+
+
+      }
+
+      //
+
+      function animate() {
+
+        renderer.setAnimationLoop( render );
+
+      }
+
+      function render() {
+
+        const delta = clock.getDelta() * 60;
+
+        if ( controller.userData.isSelecting === true ) {
+
+          const cube = room.children[ 0 ];
+          room.remove( cube );
+
+          cube.position.copy( controller.position );
+          cube.userData.velocity.x = ( Math.random() - 0.5 ) * 0.02 * delta;
+          cube.userData.velocity.y = ( Math.random() - 0.5 ) * 0.02 * delta;
+          cube.userData.velocity.z = ( Math.random() * 0.01 - 0.05 ) * delta;
+          cube.userData.velocity.applyQuaternion( controller.quaternion );
+          room.add( cube );
+
+        }
+
+        // find intersections
+
+        tempMatrix.identity().extractRotation( controller.matrixWorld );
+
+        raycaster.ray.origin.setFromMatrixPosition( controller.matrixWorld );
+        raycaster.ray.direction.set( 0, 0, - 1 ).applyMatrix4( tempMatrix );
+
+        const intersects = raycaster.intersectObjects( room.children, false );
+
+        if ( intersects.length > 0 ) {
+
+          if ( INTERSECTED != intersects[ 0 ].object ) {
+
+            if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+            INTERSECTED = intersects[ 0 ].object;
+            INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+            INTERSECTED.material.emissive.setHex( 0xff0000 );
+
+          }
+
+        } else {
+
+          if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+
+          INTERSECTED = undefined;
+
+        }
+
+        // Keep cubes inside room
+
+        for ( let i = 0; i < room.children.length; i ++ ) {
+
+          const cube = room.children[ i ];
+
+          cube.userData.velocity.multiplyScalar( 1 - ( 0.001 * delta ) );
+
+          cube.position.add( cube.userData.velocity );
+
+          if ( cube.position.x < - 3 || cube.position.x > 3 ) {
+
+            cube.position.x = THREE.MathUtils.clamp( cube.position.x, - 3, 3 );
+            cube.userData.velocity.x = - cube.userData.velocity.x;
+
+          }
+
+          if ( cube.position.y < 0 || cube.position.y > 6 ) {
+
+            cube.position.y = THREE.MathUtils.clamp( cube.position.y, 0, 6 );
+            cube.userData.velocity.y = - cube.userData.velocity.y;
+
+          }
+
+          if ( cube.position.z < - 3 || cube.position.z > 3 ) {
+
+            cube.position.z = THREE.MathUtils.clamp( cube.position.z, - 3, 3 );
+            cube.userData.velocity.z = - cube.userData.velocity.z;
+
+          }
+
+          cube.rotation.x += cube.userData.velocity.x * 2 * delta;
+          cube.rotation.y += cube.userData.velocity.y * 2 * delta;
+          cube.rotation.z += cube.userData.velocity.z * 2 * delta;
+
+        }
+
+        renderer.render( scene, camera );
+
+      }
+
+    </script>
+
+  
+
+
+</body>
+</html>
