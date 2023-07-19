@@ -19,8 +19,8 @@ from torch.nn.functional import relu, tanh, sigmoid, softplus, grid_sample, affi
 
 
 
-# from cellair.model_2d_constants import img_height, img_width, obj_height, obj_width
-from cellair.utils.constants import curdir, dataroot, mysqlconfig, mysqlurl
+# from cellist.model_2d_constants import img_height, img_width, obj_height, obj_width
+from cellist.utils.constants import curdir, dataroot, mysqlconfig, mysqlurl
 
 
 class BiDict(OrderedDict):
@@ -49,13 +49,13 @@ def get_model_info(model_id):
     conn = pm.connect(
         **mysqlconfig
     )
-    conn.select_db("cellair")
+    conn.select_db("cellist")
     cursor = conn.cursor()
     sql = f" \
         SELECT \
             slice_height, slice_width, object_min, object_max, n_grid_height, n_grid_width, maximum_in_grid\
         FROM \
-            cellair_models \
+            cellist_models \
         WHERE \
             model_id = \'{model_id}\'\
         LIMIT \
@@ -73,13 +73,13 @@ def get_grid_info(model_id):
     # conn = pm.connect(
     #     **mysqlconfig
     # )
-    # conn.select_db("cellair")
+    # conn.select_db("cellist")
     # cursor = conn.cursor()
     # sql = f" \
     #     SELECT \
     #         n_grid_height, n_grid_width, maximum_in_grid\
     #     FROM \
-    #         cellair_models \
+    #         cellist_models \
     #     WHERE \
     #         model_id = \'{model_id}\'\
     #     LIMIT \

@@ -19,12 +19,12 @@ from torch.nn.functional import relu, tanh, sigmoid, softplus, grid_sample, affi
 
 
 
-from cellair.dicton import Dicton
-from cellair.model_init import ModelD2Init
-from cellair.model_2d_components import Decoder, Encoder, Compartment, PredictSPAIR, BaselineStep
-from cellair.model_2d_utilities import *
-# from cellair.model_2d_constants import *
-from cellair.utils.constants import curdir, dataroot, mysqlconfig, mysqlurl
+from cellist.dicton import Dicton
+from cellist.model_init import ModelD2Init
+from cellist.model_2d_components import Decoder, Encoder, Compartment, PredictSPAIR, BaselineStep
+from cellist.model_2d_utilities import *
+# from cellist.model_2d_constants import *
+from cellist.utils.constants import curdir, dataroot, mysqlconfig, mysqlurl
 
 import json
 import shutil
@@ -407,11 +407,11 @@ class ModelD2Pretrain(ModelD2Init):
                 t5.annotation as manual_annotation, \
                 t5.y_pres as manual_y_pres \
             FROM \
-                 cellair.cellair_cropped t1  LEFT JOIN cellair.cellair_models t3 \
+                 cellist.cellist_cropped t1  LEFT JOIN cellist.cellist_models t3 \
                         ON t1.model_id=t3.model_id \
-                            LEFT JOIN cellair_annotation_algorithm t4 \
+                            LEFT JOIN cellist_annotation_algorithm t4 \
                                 ON t1.cropped_id=t4.cropped_id\
-                                    LEFT JOIN cellair_annotation_manual t5\
+                                    LEFT JOIN cellist_annotation_manual t5\
                                         ON t1.cropped_id = t5.cropped_id \
             WHERE t1.model_id='{model_id}'\
             "

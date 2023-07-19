@@ -15,4 +15,4 @@ mysqlconfig = {
     "password": "lazeal0626"
 
 }
-mysqlurl = f'mysql+pymysql://{mysqlconfig["user"]}:{mysqlconfig["password"]}@{mysqlconfig["host"]}/cellair'
+mysqlurl = f'mysql+pymysql://{mysqlconfig["user"]}:{mysqlconfig["password"]}@{mysqlconfig["host"]}/cellist'

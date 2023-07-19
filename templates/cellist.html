@@ -338,7 +338,7 @@
             <span class="input-group-text">Model id</span>
           </div> -->
           <!-- <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="lachlan_real_test_20220801_103936_872750" placeholder="model_id" class="form-control" id="input-load-model-id" data-label="load_model_id" data-regex="a-zA-Z0-9_" aria-label="Default" aria-describedby="inputGroup-sizing-default"> -->
-          <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="lachlan_wuwuwu_20230719_133546_743637" placeholder="model_id" class="form-control" id="input-load-model-id" data-label="load_model_id" data-regex="a-zA-Z0-9_" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          <input type="text" data-toggle="tooltip" title="only letters and number allowed" value="lachlan_initial_20230719_170036_624164" placeholder="model_id" class="form-control" id="input-load-model-id" data-label="load_model_id" data-regex="a-zA-Z0-9_" aria-label="Default" aria-describedby="inputGroup-sizing-default">
           <a href="#" class="btn btn-primary" id="btn-load-model" role="button" aria-disabled="true">Load Model</a>
         </div>
       </div>
@@ -521,8 +521,9 @@
           // popMsg(event.data, )
 
           if (json_data["data_type"] == "create") {
-            $("#input-model-id").val(json_data["model_id"]);
-            $("#input-load-model-id").val(json_data["model_id"]);
+            $("#input-model-id").val(json_data["model_id"]).trigger("change");
+
+            $("#input-load-model-id").val(json_data["model_id"]).trigger("change");
           }
 
 
@@ -866,6 +867,7 @@
     function clearAll() {
       for (key in canvasConfigAll) {
         $("#"+key).remove();
+        delete canvasConfigAll[key];
       }
     }
 
@@ -1184,6 +1186,8 @@
 
     $("#btn-delete").click(function () {
       $(target_canvas).remove();
+      delete canvasConfigAll[target_canvas.id];
+
     });
 
     $("#btn-clear").click(clearAll);

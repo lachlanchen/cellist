@@ -24,12 +24,12 @@ import pandas as pd
 import pymysql as pm
 from sqlalchemy import inspect, create_engine
 
-from cellair.dicton import Dicton
-from cellair.model_init import ModelD2Init
-from cellair.model_pretrain import ModelD2Pretrain
-from cellair.utils.constants import curdir, dataroot, mysqlconfig, mysqlurl
-from cellair.image_preprocessing import image_slice, image_stitch
-from cellair.model_2d_utilities import get_grid_info
+from cellist.dicton import Dicton
+from cellist.model_init import ModelD2Init
+from cellist.model_pretrain import ModelD2Pretrain
+from cellist.utils.constants import curdir, dataroot, mysqlconfig, mysqlurl
+from cellist.image_preprocessing import image_slice, image_stitch
+from cellist.model_2d_utilities import get_grid_info
 
 from uuid import uuid4
 
@@ -178,7 +178,7 @@ def crop_images_daemon(model_id, images, model_height=256, model_width=256):
     sql_inspector = inspect(sql_engine)
 
     images_query_array =  '"' +'","'.join(images) + '"'
-    query_ql = f'select image_id, path from cellair_images where image_id in( {images_query_array} ) '
+    query_ql = f'select image_id, path from cellist_images where image_id in( {images_query_array} ) '
     # print(query_ql)
     query = pd.DataFrame([])
     while len(images) != len(query):
@@ -243,7 +243,7 @@ def crop_images_daemon(model_id, images, model_height=256, model_width=256):
 
 
 
-    table = "cellair_cropped"
+    table = "cellist_cropped"
     check = sql_inspector.has_table(table)
     if check:
         data.to_sql(table, con=sql_engine, index=False, if_exists="append")
@@ -275,7 +275,7 @@ def update_model_images(model_id, images):
 
 
 
-    table = "cellair_model_images_rel"
+    table = "cellist_model_images_rel"
     check = sql_inspector.has_table(table)
     if check:
         data.to_sql(table, con=sql_engine, index=False, if_exists="append")
@@ -324,7 +324,7 @@ def create_model_info(arguments):
     data["model_id"] = model_id
 
 
-    table = "cellair_models"
+    table = "cellist_models"
     check = sql_inspector.has_table(table)
     if check:
         data.to_sql(table, con=sql_engine, index=False, if_exists="append")
@@ -339,13 +339,13 @@ def check_annotation(model_id, cropped_id, table="algorithm"):
     conn = pm.connect(
         **mysqlconfig
     )
-    conn.select_db("cellair")
+    conn.select_db("cellist")
     cursor = conn.cursor()
     sql = f" \
         SELECT \
             id \
         FROM \
-             cellair_annotation_{table}\
+             cellist_annotation_{table}\
         WHERE \
             model_id = '{model_id}' and cropped_id = '{cropped_id}' \
         LIMIT \
@@ -365,10 +365,10 @@ def update_annotation(annotation_id, annotation, y_pres, table="algorithm"):
     conn = pm.connect(
         **mysqlconfig
     )
-    conn.select_db("cellair")
+    conn.select_db("cellist")
     cursor = conn.cursor()
     sql = f" \
-        UPDATE cellair_annotation_{table}\
+        UPDATE cellist_annotation_{table}\
         SET \
             annotation='{annotation}', \
             y_pres='{y_pres}' \
@@ -427,7 +427,7 @@ def save_manual_annotation(username, model_id, cropped_id, annotation):
     # print("annotation_id: ", annotation_id)
     if annotation_id == -1:
 
-        table = "cellair_annotation_manual"
+        table = "cellist_annotation_manual"
         check = sql_inspector.has_table(table)
         if check:
             data.to_sql(table, con=sql_engine, index=False, if_exists="append")
@@ -464,7 +464,7 @@ def initialize_with_algorithm(username, model_id, algorithm):
         f"\
         SELECT t1.cropped_id, t1.path, t3.object_min, t3.object_max \
         FROM \
-             cellair.cellair_cropped t1  LEFT JOIN cellair.cellair_models t3 \
+             cellist.cellist_cropped t1  LEFT JOIN cellist.cellist_models t3 \
                     ON t1.model_id=t3.model_id \
         WHERE t1.model_id='{model_id}'\
         ",
@@ -596,7 +596,7 @@ def initialize_with_algorithm(username, model_id, algorithm):
         annotation_id = check_annotation(model_id, cropped_id, "algorithm")
         if annotation_id == -1:
 
-            table = "cellair_annotation_algorithm"
+            table = "cellist_annotation_algorithm"
             check = sql_inspector.has_table(table)
             if check:
                 data.to_sql(table, con=sql_engine, index=False, if_exists="append")
@@ -641,12 +641,12 @@ def create_model_per_se(username, model_id, algorithm, images, slice_height, sli
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
 
-        self.render("templates/cellair.html", title="cellair")
+        self.render("templates/cellist.html", title="cellist")
 
 class D3Handler(tornado.web.RequestHandler):
     def get(self):
 
-        self.render("templates/cellair_3d.html", title="cellair 3D")
+        self.render("templates/cellist_3d.html", title="cellist 3D")
 
 
 class TestHandler(tornado.web.RequestHandler, Dicton):
@@ -704,7 +704,7 @@ class UploadHandler(tornado.web.RequestHandler):
         data = pd.DataFrame({"image_id": uuids, "path": paths})
         data["source"] = "Upload"
             
-        table = "cellair_images"
+        table = "cellist_images"
     
         check = sql_inspector.has_table(table)
         if check:
@@ -739,14 +739,14 @@ class LoadModelHandler(tornado.web.RequestHandler):
         conn = pm.connect(
             **mysqlconfig
         )
-        conn.select_db("cellair")
+        conn.select_db("cellist")
         cursor = conn.cursor()
 
         sql = f" \
             SELECT \
                 t1.cropped_id, t1.path, t1.pos_x, t1.pos_y\
             FROM \
-                cellair_model_images_rel t0 LEFT JOIN cellair_cropped t1 \
+                cellist_model_images_rel t0 LEFT JOIN cellist_cropped t1 \
             ON \
                 t0.image_id = t1.image_id \
             WHERE \
