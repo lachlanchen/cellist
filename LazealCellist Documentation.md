@@ -2,7 +2,7 @@
 
 # Logic of Lazeal Cellist Platform
 
-![cellist.png](LazealCellist%20Documentation%208cc8583b89a84d9989a85043e9a87e7a/cellist.png)
+![cellist.png](LazealCellist%20Documentation/cellist.png)
 
 This model is indeed a form of structured Variational AutoEncoder (VAE) with Sequential Monte Carlo (SMC) elements. The overall structure can be represented as:
 
@@ -67,10 +67,38 @@ Where $p(x*{\text{obs}}, z)$ is the joint probability of the observed data and t
 
 - Math
 
-![Screenshot from 2023-07-20 14-32-17.png](LazealCellist%20Documentation%208cc8583b89a84d9989a85043e9a87e7a/Screenshot_from_2023-07-20_14-32-17.png)
+Absolutely. Let's write down the equation and explain it.
 
+The core operation of the script is the computation of the "score" for each pixel in the image. This score is a measure of how far the pixel is from the edges of the polygon. The score is calculated using the cross product of the vectors from the pixel to each pair of vertices in the polygon.
+
+The equation for calculating the score for a pixel at coordinates $(x*{xy}, y*{xy})$ is:
+
+$$
+\text{score}*{xy} = \sum*{i=1}^{N} \text{sign}\left( (x*{i} - x*{xy})(y*{i+1} - y*{i}) - (y*{i} - y*{xy})(x*{i+1} - x*{i}) \right)
+$$
+
+Where:
+
+- $(x*{xy}, y*{xy})$ are the coordinates of the pixel.
+- $(x*{i}, y*{i})$ and $(x*{i+1}, y*{i+1})$ are the coordinates of the i-th and (i+1)-th vertices of the polygon. The vertices are ordered in a counterclockwise manner around the polygon.
+- $N$ is the number of vertices.
+- The sign function returns -1 for negative numbers, 0 for zero, and 1 for positive numbers.
+
+The score for each pixel is then normalized by subtracting the minimum score and dividing by the range of the scores (maximum score - minimum score). This normalized score is then used to generate the heat map image.
+
+The equation for normalizing the scores is:
+
+$$
+\text{score}*{\text{norm}} = \frac{\text{score}*{xy} - \text{min}(\text{score})}{\text{max}(\text{score}) - \text{min}(\text{score})}
+$$
+
+Where:
+
+- $\text{score}*{xy}$ is the score for the pixel at coordinates $(x*{xy}, y_{xy})$.
+- $\text{min}(\text{score})$ and $\text{max}(\text{score})$ are the minimum and maximum scores over all pixels, respectively.
+- $\text{score}_{\text{norm}}$ is the normalized score for the pixel.
 - Code
-    
+  
     ```sql
     import numpy as np
     import matplotlib.pyplot as plt
@@ -127,8 +155,8 @@ Where $p(x*{\text{obs}}, z)$ is the joint probability of the observed data and t
     ```
     
 - Result
-    
-    ![polygon_sample.png](LazealCellist%20Documentation%208cc8583b89a84d9989a85043e9a87e7a/polygon_sample.png)
+  
+    ![polygon_sample.png](LazealCellist%20Documentation/polygon_sample.png)
     
 
 ## Optimize the model for **float32** data type, especially for these extremely small and large number occurred in calculation.
