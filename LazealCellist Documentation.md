@@ -82,7 +82,7 @@ Where $p_{\text{pres}}(x_{\text{obs}})$, $\mu_{\text{where}}(x_{\text{obs}})$, $
 The goal of stochastic variational inference is to maximize the ELBO (Evidence Lower BOund), which is given by:
 
 $$
-\text{ELBO} = \mathbb{E}_{q(z|x_{\text{obs}})}[]
+\text{ELBO} = 
 $$
 
 
