@@ -917,6 +917,10 @@
             sy = (canvas_config[key].height - closeEnough*2) / image.height,
             x = (canvas_config[key].offsetLeft - image.offsetLeft + closeEnough) * 2 / image.width + (-1) - (-1) * sx,
             y =(canvas_config[key].offsetTop - image.offsetTop + closeEnough) * 2 / image.height + (-1) - (-1) * sy;
+        // let sx = Math.max(0, Math.min((canvas_config[key].width - closeEnough*2) / image.width, 0.9999)),
+        //     sy = Math.max(0, Math.min((canvas_config[key].height - closeEnough*2) / image.height, 0.9999)),
+        //     x = Math.max(-1, Math.min((canvas_config[key].offsetLeft - image.offsetLeft + closeEnough) * 2 / image.width + (-1) - (-1) * sx, 1)),
+        //     y = Math.max(-1, Math.min((canvas_config[key].offsetTop - image.offsetTop + closeEnough) * 2 / image.height + (-1) - (-1) * sy, 1));
 
         if (!ignore_outside) {
           z_where_inverse.push([
@@ -924,10 +928,10 @@
           ]);
         } else {
           if (
-            canvas_config[key].offsetLeft + canvas_config[key].width <= image.offsetLeft || 
-            canvas_config[key].offsetTop + canvas_config[key].height <= image.offsetTop || 
-            canvas_config[key].offsetLeft >= image.offsetLeft + image.width ||
-            canvas_config[key].offsetTop >= image.offsetTop + image.height
+            canvas_config[key].offsetLeft + canvas_config[key].width / 2 <= image.offsetLeft || 
+            canvas_config[key].offsetTop + canvas_config[key].height / 2 <= image.offsetTop || 
+            canvas_config[key].offsetLeft + canvas_config[key].width / 2 >= image.offsetLeft + image.width ||
+            canvas_config[key].offsetTop + canvas_config[key].height / 2 >= image.offsetTop + image.height
           ) {
 
             console.log("Out of boundary, ignored! ")

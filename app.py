@@ -397,6 +397,8 @@ def save_manual_annotation(username, model_id, cropped_id, annotation):
     yx = torch.from_numpy(yx)
 
     # y_pres = tf.scatter_nd(yx, tf.ones(yx.shape[:1]), (n_grid_height, n_grid_width)).numpy()
+
+    print("yx: ", yx)
     y_pres = torch.zeros((n_grid_height, n_grid_width))
     y_pres = y_pres.index_put_(
         [
