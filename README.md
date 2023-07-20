@@ -1,6 +1,6 @@
 # Lazeal Cellist
 
-![Screenshot from 2023-07-20 10-23-22](/home/lachlan/Projects/cellist/Screenshot from 2023-07-20 10-23-22.png)
+![screenshot](screenshot.png)
 
 ## Lazeal Cellist: Your Efficient 3D Cell Detection and Profiling Platform
 
