@@ -15,7 +15,7 @@ For each image:
                 Sample position and size of the object: z_where[i,j,t] ~ Normal(mu, sigma)
                 Sample appearance of the object: z_what[i,j,t] ~ Normal(mu, sigma)
                 Generate image patch for the object: y[i,j,t] = Decoder(z_what[i,j,t])
-            Combine the generated object with the existing image: x = x + z_pres[i,j,t] * SpatialTransformer(y[i,j,t], z_where[i,j,t])
+            Combine the generated object with the existing image: x = x + z_pres[i,j,t] _ SpatialTransformer(y[i,j,t], z_where[i,j,t])
     Observe the final image with some noise: x_obs ~ Normal(x, sigma)
 ```
 
@@ -77,7 +77,7 @@ $$
 
 
 
-Where $p*{\text{pres}}(x*{\text{obs}})$, $\mu*{\text{where}}(x*{\text{obs}})$, $\sigma*{\text{where}}(x*{\text{obs}})$, $\mu*{\text{what}}(x*{\text{obs}})$, and $\sigma*{\text{what}}(x*{\text{obs}})$ are functions parameterized by neural networks.
+Where $p_{\text{pres}}(x_{\text{obs}})$, $\mu_{\text{where}}(x_{\text{obs}})$, $\sigma_{\text{where}}(x_{\text{obs}})$, $\mu_{\text{what}}(x_{\text{obs}})$, and $\sigma_{\text{what}}(x_{\text{obs}})$ are functions parameterized by neural networks.
 
 The goal of stochastic variational inference is to maximize the ELBO (Evidence Lower BOund), which is given by:
 
@@ -86,7 +86,7 @@ $$
 $$
 
 
-Where $p(x*{\text{obs}}, z)$ is the joint probability of the observed data and the latent variables under the model, and $q(z|x*{\text{obs}})$ is the variational distribution that approximates the true posterior $p(z|x_{\text{obs}})$.
+Where $p(x_{\text{obs}}, z)$ is the joint probability of the observed data and the latent variables under the model, and $q(z|x_{\text{obs}})$ is the variational distribution that approximates the true posterior $p(z|x_{\text{obs}})$.
 
 # TODO
 
@@ -98,16 +98,16 @@ Absolutely. Let's write down the equation and explain it.
 
 The core operation of the script is the computation of the "score" for each pixel in the image. This score is a measure of how far the pixel is from the edges of the polygon. The score is calculated using the cross product of the vectors from the pixel to each pair of vertices in the polygon.
 
-The equation for calculating the score for a pixel at coordinates $(x*{xy}, y*{xy})$ is:
+The equation for calculating the score for a pixel at coordinates $(x_{xy}, y_{xy})$ is:
 
 $$
-\text{score}*{xy} = \sum*{i=1}^{N} \text{sign}\left( (x*{i} - x*{xy})(y*{i+1} - y*{i}) - (y*{i} - y*{xy})(x*{i+1} - x*{i}) \right)
+\text{score}{xy} = \sum_{i=1}^{N} \text{sign}\left( (x{i} - x{xy})(y{i+1} - y{i}) - (y{i} - y{xy})(x{i+1} - x{i}) \right)
 $$
 
 Where:
 
-- $(x*{xy}, y*{xy})$ are the coordinates of the pixel.
-- $(x*{i}, y*{i})$ and $(x*{i+1}, y*{i+1})$ are the coordinates of the i-th and (i+1)-th vertices of the polygon. The vertices are ordered in a counterclockwise manner around the polygon.
+- $(x_{xy}, y_{xy})$ are the coordinates of the pixel.
+- $(x_{i}, y_{i})$ and $(x_{i+1}, y_{i+1})$ are the coordinates of the i-th and (i+1)-th vertices of the polygon. The vertices are ordered in a counterclockwise manner around the polygon.
 - $N$ is the number of vertices.
 - The sign function returns -1 for negative numbers, 0 for zero, and 1 for positive numbers.
 
@@ -116,12 +116,12 @@ The score for each pixel is then normalized by subtracting the minimum score and
 The equation for normalizing the scores is:
 
 $$
-\text{score}*{\text{norm}} = \frac{\text{score}*{xy} - \text{min}(\text{score})}{\text{max}(\text{score}) - \text{min}(\text{score})}
+\text{score}_{\text{norm}} = \frac{\text{score}_{xy} - \text{min}(\text{score})}{\text{max}(\text{score}) - \text{min}(\text{score})}
 $$
 
 Where:
 
-- $\text{score}*{xy}$ is the score for the pixel at coordinates $(x*{xy}, y_{xy})$.
+- $\text{score}_{xy}$ is the score for the pixel at coordinates $(x_{xy}, y_{xy})$.
 - $\text{min}(\text{score})$ and $\text{max}(\text{score})$ are the minimum and maximum scores over all pixels, respectively.
 - $\text{score}_{\text{norm}}$ is the normalized score for the pixel.
 - Code
@@ -163,12 +163,12 @@ Where:
     a = np.argsort(angles)[::-1]
     b = np.roll(a, -1)
     
-    cross_ref = directions[a] * directions[b, ::-1] * np.array([[1, -1.]])
+    cross_ref = directions[a] _ directions[b, ::-1] _ np.array([[1, -1.]])
     cross_ref = cross_ref.sum(axis=-1)
     
     # Calculate score for each pixel
     score = vertices[:, None, None, :] - xy
-    score = score[a] * score[b, :, :, ::-1] * np.array([1, -1])
+    score = score[a] _ score[b, :, :, ::-1] _ np.array([1, -1])
     score = (np.sign(score.sum(axis=-1))).sum(0)
     
     # Normalize score to range between 0 and 1 using a form of softmax function
@@ -186,11 +186,11 @@ Where:
     ![polygon_sample.png](LazealCellist%20Documentation/polygon_sample.png)
     
 
-## Optimize the model for **float32** data type, especially for these extremely small and large number occurred in calculation.
+## Optimize the model for __float32__ data type, especially for these extremely small and large number occurred in calculation.
 
-## Shrink the **model size** if possible.
+## Shrink the __model size__ if possible.
 
-## Upgrade the model for robust detection, like incorporating it with **transformer and stable diffusion.**
+## Upgrade the model for robust detection, like incorporating it with __transformer and stable diffusion.__
 
 ## Add base model option (Threshold, Cellpose) and target model option (AIR, Transformer, SD)
 
