@@ -82,7 +82,7 @@ Where $p*{\text{pres}}(x*{\text{obs}})$, $\mu*{\text{where}}(x*{\text{obs}})$, $
 The goal of stochastic variational inference is to maximize the ELBO (Evidence Lower BOund), which is given by:
 
 $$
-\text{ELBO} = \mathbb{E}_{q(z|x_{\text{obs}})}[\log p(x_{\text{obs}}, z) - \log q(z|x_{\text{obs}})]
+\text{ELBO} = E_{q(z|x_{\text{obs}})}[\log p(x_{\text{obs}}, z) - \log q(z|x_{\text{obs}})]
 $$
 Where $p(x*{\text{obs}}, z)$ is the joint probability of the observed data and the latent variables under the model, and $q(z|x*{\text{obs}})$ is the variational distribution that approximates the true posterior $p(z|x_{\text{obs}})$.
 
