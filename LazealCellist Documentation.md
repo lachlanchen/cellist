@@ -101,7 +101,7 @@ The core operation of the script is the computation of the "score" for each pixe
 The equation for calculating the score for a pixel at coordinates $(x_{xy}, y_{xy})$ is:
 
 $$
-\text{score}{xy} = \sum_{i=1}^{N} \text{sign}\left( (x{i} - x{xy})(y{i+1} - y{i}) - (y{i} - y{xy})(x{i+1} - x{i}) \right)
+\text{score}_{xy} = \sum_{i=1}^{N} \text{sign}\left( (x{i} - x_{xy})(y_{i+1} - y_{i}) - (y_{i} - y_{xy})(x_{i+1} - x_{i}) \right)
 $$
 
 Where:
