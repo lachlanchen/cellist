@@ -247,3 +247,10 @@ mysql -u root -p cellist < /home/user/cellist.sql
 ```jsx
 conda env create -f celist.yaml
 ```
+
+## Start the web server
+
+```
+python app.py -m cellist
+```
+
