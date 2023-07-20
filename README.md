@@ -1,5 +1,7 @@
 # Lazeal Cellist
 
+![Screenshot from 2023-07-20 10-23-22](/home/lachlan/Projects/cellist/Screenshot from 2023-07-20 10-23-22.png)
+
 ## Lazeal Cellist: Your Efficient 3D Cell Detection and Profiling Platform
 
 Welcome to Lazeal Cellist, a comprehensive and efficient cell detection, segmentation, and profiling platform for 3D microscopy images.
