@@ -1,6 +1,6 @@
 # Lazeal Cellist
 
-![screenshot](screenshot.png)
+![Screenshot 2D](screenshot2d.png)
 
 ## Lazeal Cellist: Your Efficient 3D Cell Detection and Profiling Platform
 
