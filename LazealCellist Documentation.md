@@ -116,14 +116,14 @@ The score for each pixel is then normalized by subtracting the minimum score and
 The equation for normalizing the scores is:
 
 $$
-\text{score}_{\text{norm}} = \frac{\text{score}_{xy} - \text{min}(\text{score})}{\text{max}(\text{score}) - \text{min}(\text{score})}
+S_{\text{norm}} = \frac{S_{xy} - \text{min}(S)}{\text{max}(S) - \text{min}(S)}
 $$
 
 Where:
 
-- $\text{score}_{xy}$ is the score for the pixel at coordinates $(x_{xy}, y_{xy})$.
-- $\text{min}(\text{score})$ and $\text{max}(\text{score})$ are the minimum and maximum scores over all pixels, respectively.
-- $\text{score}_{\text{norm}}$ is the normalized score for the pixel.
+- $S_{xy}$ is the score for the pixel at coordinates $(x_{xy}, y_{xy})$.
+- $\text{min}(S)$ and $\text{max}(S)$ are the minimum and maximum scores over all pixels, respectively.
+- $S_{\text{norm}}$ is the normalized score for the pixel.
 - Code
   
     ```sql
