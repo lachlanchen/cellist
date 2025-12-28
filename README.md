@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="figs/banner.png" alt="LazyingArt banner" />
+</p>
+
 # Lazeal Cellist
 
 ![Screenshot 2D](screenshot2d.png)
