@@ -1,95 +1,162 @@
 [English](../README.md) · [العربية](README.ar.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Tiếng Việt](README.vi.md) · [中文 (简体)](README.zh-Hans.md) · [中文（繁體）](README.zh-Hant.md) · [Deutsch](README.de.md) · [Русский](README.ru.md)
 
 
+[![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
+
+<h1 align="center">Lazeal Cellist</h1>
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lachlanchen/lachlanchen/main/logos/banner.png" alt="LazyingArt banner" />
+  <strong>Ihre effiziente Plattform für 3D-Zellerkennung und -profilierung</strong>
 </p>
 
-# Lazeal Cellist
+<p align="center">
+  <img src="https://img.shields.io/badge/status-research%20prototype-blue" alt="Status" />
+  <img src="https://img.shields.io/badge/backend-Tornado-00A3E0" alt="Backend" />
+  <img src="https://img.shields.io/badge/ML-PyTorch%20%2B%20Pyro%20%2B%20Cellpose-orange" alt="ML" />
+  <img src="https://img.shields.io/badge/database-MySQL-4479A1" alt="Datenbank" />
+  <img src="https://img.shields.io/badge/platform-Linux-lightgrey" alt="Plattform" />
+  <img src="https://img.shields.io/badge/UI-Bootstrap%20%2B%20jQuery-7952B3" alt="UI" />
+  <img src="https://img.shields.io/badge/port-8887-success" alt="Port" />
+</p>
 
-![Status](https://img.shields.io/badge/status-research%20prototype-blue)
-![Backend](https://img.shields.io/badge/backend-Tornado-00A3E0)
-![ML](https://img.shields.io/badge/ML-PyTorch%20%2B%20Pyro%20%2B%20Cellpose-orange)
-![DB](https://img.shields.io/badge/database-MySQL-4479A1)
-![Platform](https://img.shields.io/badge/platform-Linux-lightgrey)
-![UI](https://img.shields.io/badge/UI-Bootstrap%20%2B%20jQuery-7952B3)
+<p align="center">
+  <a href="#-overview"><img src="https://img.shields.io/badge/Read-Overview-0EA5E9?style=flat-square" alt="Übersicht" /></a>
+  <a href="#-installation"><img src="https://img.shields.io/badge/Setup-Installation-10B981?style=flat-square" alt="Installation" /></a>
+  <a href="#-usage"><img src="https://img.shields.io/badge/Run-Usage-F59E0B?style=flat-square" alt="Nutzung" /></a>
+  <a href="#-troubleshooting"><img src="https://img.shields.io/badge/Fix-Troubleshooting-E11D48?style=flat-square" alt="Fehlerbehebung" /></a>
+  <a href="#-contributing"><img src="https://img.shields.io/badge/Build-Contributing-6366F1?style=flat-square" alt="Mitwirken" /></a>
+</p>
 
-![Screenshot 2D](../screenshot2d.png)
+![Screenshot 2D](screenshot2d.png)
 
-## Lazeal Cellist: Ihre effiziente Plattform für 3D-Zellerkennung und Profiling
+## Lazeal Cellist: Ihre effiziente Plattform für 3D-Zellerkennung und -profilierung
 
-Willkommen bei Lazeal Cellist, einer umfassenden und effizienten Plattform zur Zellerkennung, Segmentierung und Profilierung von 3D-Mikroskopiebildern.
+Willkommen bei Lazeal Cellist, einer umfassenden und effizienten Plattform zur Zellerkennung, Segmentierung und Profilierung in 3D-Mikroskopieaufnahmen.
 
-Unsere Plattform ist darauf ausgelegt, Zellen mithilfe von unüberwachtem Lernen, Schwellwertverfahren und modernen Algorithmen wie Cellpose zu erkennen. Lazeal Cellist bietet außerdem eine intuitive, interaktive Oberfläche, mit der Nutzer Erkennungsergebnisse verfeinern können. Diese verfeinerten Ergebnisse werden anschließend in das semisupervidierte Lernnetz zurückgeführt und verbessern die Modellleistung kontinuierlich.
+Unsere Plattform ist darauf ausgelegt, Zellen mit unüberwachtem Lernen, Schwellwertverfahren und modernsten Algorithmen wie Cellpose zu erkennen. Lazeal Cellist bietet außerdem eine intuitive, interaktive Oberfläche, mit der Nutzer:innen die Erkennungsergebnisse verfeinern können. Diese verfeinerten Ergebnisse fließen anschließend in das semisupervisierte Lernnetzwerk ein und verbessern die Modellleistung kontinuierlich.
 
-Lazeal Cellist hebt sich durch ein effizientes 3D-Modell hervor, das nur minimalen Aufwand für Training und Verfeinerung erfordert und damit eine praktische Plattform für Wissenschaftler, Forschende und Hobby-Anwender ist.
+Lazeal Cellist zeichnet sich dadurch aus, dass es ein effizientes 3D-Modell mit minimalem Trainings- und Verfeinerungsaufwand bietet und damit eine praxisnahe Plattform für Wissenschaftler:innen, Forschende und Hobbyprojekte ist.
+
+> ℹ️ **Hinweis zum Umfang**
+> Die Projektvision und die Benutzeroberfläche enthalten 3D-Konzepte (`/3d`, `templates/cellist_3d.html`), während der aktuelle primäre Trainingsfluss im Code überwiegend auf 2D-Slicing und Verfeinerung basiert.
 
 ---
 
-## 🔍 Überblick
+## Inhaltsverzeichnis
 
-Lazeal Cellist ist eine Python/Tornado-Webplattform für Mikroskopie-Bild-Workflows mit:
+- [Überblick](#-overview)
+- [Kernfunktionen](#-key-features)
+- [Projektstruktur](#-project-structure)
+- [Voraussetzungen](#-prerequisites)
+- [Installation](#-installation)
+- [Verwendung](#-usage)
+- [Konfiguration](#-configuration)
+- [Beispiele](#-examples)
+- [Durch Forschung inspiriert](#-inspired-by-research)
+- [Entwicklungsnotizen](#-development-notes)
+- [Fehlerbehebung](#-troubleshooting)
+- [Roadmap](#-roadmap)
+- [Mitwirken](#-contributing)
+- [Danksagungen](#-acknowledgements)
+- [Support](#-support)
+- [Lizenz](#-license)
 
-- Browserbasiertem Upload, Modellerstellung und Bearbeitung von Annotationen.
-- Algorithmusgestützter Initialisierung (Cellpose nuclei mode).
-- Iterativer Human-in-the-loop-Verfeinerung über WebSocket-Aktionen (`initialize`, `pretrain`, `train`, `update`, `reset`).
-- Datenbankgestützter Persistenz für Modelle, Bild-Slices und Annotationen.
+## 🔍 Overview
 
-Hinweis zum aktuellen Verhalten: Obwohl Projektvision und UI 3D-Konzepte enthalten (`/3d`, `templates/cellist_3d.html`), basiert der aktuelle Haupt-Trainingsfluss im Code primär auf 2D-Slicing plus Modellverfeinerung.
+Lazeal Cellist ist eine Python/Tornado-Webplattform für Workflows mit Mikroskopie-Bildern mit:
 
-### Kurzüberblick
+- browserbasierter Upload, Modellerstellung und Bearbeitung von Annotationen.
+- Algorithmisch unterstützte Initialisierung (Cellpose-Kernmodus).
+- Iterative Mensch-im-Kreis-Verfeinerung über WebSocket-Aktionen (`create`, `initialize`, `pretrain`, `pretrain-stop`, `train`, `train-stop`, `update`, `reset`).
+- Datenbankgestützte Persistenz für Modelle, Bildschnitte und Annotationen.
+
+> ℹ️ Hinweis zum aktuellen Verhalten: Obwohl Projektvision und UI 3D-Konzepte enthalten (`/3d`, `templates/cellist_3d.html`), basiert der aktuelle Haupt-Trainingsfluss im Code überwiegend auf 2D-Slicing + Modellverfeinerung.
+
+### Quick At-a-Glance
 
 | Bereich | Aktuelle Implementierung |
 |---|---|
 | Server | Tornado (`app.py`) |
 | Port | `8887` |
 | Datenbank | MySQL (`cellist.sql`) |
-| Core-ML-Stack | PyTorch + Pyro + Cellpose |
+| Kern-Machine-Learning-Stack | PyTorch + Pyro + Cellpose |
 | Frontend | Bootstrap, jQuery, jQuery UI, Three.js, blueimp-file-upload |
 | Inferenz-Initialisierung | Cellpose (`model_type='nuclei'`, `gpu=True`) |
+| Packaging-Status | Forschungsprototyp (kein `pyproject.toml`/`setup.py`) |
+| Test/CI-Status | Keine dedizierte automatisierte Test-Suite oder CI-Konfiguration im Repository-Root |
 
-## ✨ Hauptfunktionen
+### Dokumentationssprachen
 
-- **Unüberwachte 3D-Zellerkennung**: Zellen in 3D-Mikroskopiebildern mit fortschrittlichen Machine-Learning-Techniken identifizieren.
-- **Interaktive Oberfläche zur Ergebnisverfeinerung**: Erkennungsergebnisse in einer intuitiven, benutzerfreundlichen Oberfläche verfeinern.
-- **Effizientes semisupervidiertes Lernnetz**: Modellleistung mit verfeinerten Ergebnissen fortlaufend verbessern.
-- **Zellsegmentierung und Profiling**: Über die Erkennung hinaus mit erweiterten Segmentierungs- und Profiling-Funktionen arbeiten.
+Dieses Repository enthält bereits mehrsprachige README-Dateien unter `i18n/`:
 
-Zusätzliche derzeit vorhandene Implementierungsmerkmale:
+| Sprache | Datei |
+|---|---|
+| Arabisch | `README.ar.md` |
+| Spanisch | `README.es.md` |
+| Französisch | `README.fr.md` |
+| Japanisch | `README.ja.md` |
+| Koreanisch | `README.ko.md` |
+| Russisch | `README.ru.md` |
+| Vietnamesisch | `README.vi.md` |
+| Chinesisch (vereinfacht) | `README.zh-Hans.md` |
+| Chinesisch (traditionell) | `README.zh-Hant.md` |
 
-- Tornado REST + WebSocket-Server (`app.py`) auf Port `8887`.
-- Automatisches Image-Tiling (`256x256` standardmäßig) zur Modellverarbeitung.
-- MySQL-Schema als Dump enthalten: [`cellist.sql`](../cellist.sql).
-- Frontend-Stack enthält Bootstrap, jQuery, jQuery UI, Three.js, blueimp-file-upload.
+## ✨ Key Features
 
-## 🗂️ Projektstruktur
+- **Unüberwachtes 3D-Zellendetektion**: Erkennen von Zellen in 3D-Mikroskopiebildern mit fortschrittlichen Machine-Learning-Techniken.
+- **Interaktive Oberfläche zur Ergebnisverfeinerung**: Verfeinern Sie Erkennungsergebnisse mit einer intuitiven, benutzerfreundlichen Benutzeroberfläche.
+- **Effizientes semisupervisiertes Lernnetzwerk**: Verbessern Sie die Modellleistung im Laufe der Zeit durch verfeinerte Ergebnisse.
+- **Zellsegmentierung und -profilierung**: Gehen Sie über die reine Erkennung hinaus mit fortgeschrittener Segmentierungs- und Profilierungsfunktionalität.
+
+Weitere aktuell vorhandene Implementierungsfunktionen:
+
+- Tornado REST + WebSocket Server (`app.py`) auf Port `8887`.
+- Automatisches Image-Tiling (`256x256` standardmäßig) für die Modelleinlesung.
+- MySQL-Schema als Dump enthalten: [`cellist.sql`](cellist.sql).
+- Frontend-Stack umfasst Bootstrap, jQuery, jQuery UI, Three.js, blueimp-file-upload.
+- Asynchrone Modellaufgaben über Thread-Pool (`max_workers=64`).
+
+## 🗂️ Project Structure
 
 ```text
 cellist/
-├── app.py
-├── cellist/                     # ML/model code (PyTorch + Pyro)
-├── templates/                   # HTML UI (2D + 3D pages)
-├── statics/                     # Frontend assets + npm deps
-├── notebooks/                   # Experiments and exploratory notebooks
-├── polygon_sample/              # Polygon annotation exploration
-├── cellist.sql                  # MySQL schema/data dump
-├── cellist.yaml                 # Conda environment
-├── create_data_folder.py        # Legacy folder bootstrap helper
+├── app.py                               # Main Tornado server + REST/WebSocket handlers
+├── cellist/                             # Core ML/model code
+│   ├── model_init.py                    # Main 2D model class and train flow
+│   ├── model_pretrain.py                # Pretrain variant
+│   ├── model_2d_components.py           # Encoder/Decoder/SPAIR components
+│   ├── model_2d_utilities.py            # DB-backed model metadata + transforms
+│   ├── image_preprocessing.py           # Slice/stitch helpers
+│   └── utils/constants.py               # Runtime paths + MySQL config
+├── templates/
+│   ├── cellist.html                     # Primary 2D UI
+│   └── cellist_3d.html                  # 3D UI variant/prototype
+├── statics/                             # Frontend assets and npm dependencies
+│   ├── package.json
+│   └── node_modules/
+├── i18n/                                # Translated README files
+├── notebooks/                           # Exploratory notebooks
+├── polygon_sample/                      # Polygon annotation experiments
+├── figs/                                # Branding assets
+├── cellist.sql                          # MySQL schema/data dump
+├── cellist.yaml                         # Conda environment specification
+├── create_data_folder.py                # Legacy data-folder creation helper
 ├── CONTRIBUTING.md
 ├── PULL_REQUEST_TEMPLATE.md
-├── LazealCellist Documentation.md
-└── i18n/                        # Present, currently empty
+├── LazealCellist Documentation.md       # Extended architecture/TODO notes
+└── README.md
 ```
 
 ## ✅ Voraussetzungen
 
-| Voraussetzung | Hinweise |
+| Anforderung | Hinweise |
 |---|---|
-| Betriebssystem | Linux empfohlen (die folgenden Befehle setzen Linux-Shell-Verhalten voraus). |
-| Python/Conda | Conda verfügbar, um die Umgebung aus [`cellist.yaml`](../cellist.yaml) zu erstellen. |
-| Datenbank | MySQL-Server läuft auf `localhost` mit der Datenbank `cellist`. |
-| GPU | NVIDIA/CUDA-Umgebung wird von aktuellen Codepfaden stark empfohlen bzw. erwartet. |
-| Node.js + npm | Erforderlich, um Frontend-Abhängigkeiten in `statics/node_modules` zu installieren. |
+| Betriebssystem | Linux empfohlen (die folgenden Befehle gehen von Linux-Shell-Verhalten aus). |
+| Python/Conda | Conda muss verfügbar sein, um die Umgebung aus [`cellist.yaml`](cellist.yaml) zu erstellen. |
+| Datenbank | MySQL-Server läuft lokal auf `localhost` mit der Datenbank `cellist`. |
+| GPU | NVIDIA/CUDA-Umgebung wird von aktuellen Codepfaden stark empfohlen/erwartet. |
+| Node.js + npm | Erforderlich zur Installation der Frontend-Abhängigkeiten unter `statics/node_modules`. |
+| Schreibzugriff auf Festplatte | Erforderlich für Laufzeitdaten unter `<repo>/data`. |
 
 ## 🛠️ Installation
 
@@ -102,14 +169,20 @@ cd cellist
 
 ### 2. Python-Umgebung erstellen
 
-Verwenden Sie den Repository-Dateinamen `cellist.yaml`:
+Verwenden Sie die Repository-Datei `cellist.yaml`:
 
 ```bash
 conda env create -f cellist.yaml
 conda activate cellist
 ```
 
-Kompatibilitätshinweis aus älteren Dokumenten: Frühere Dokumentation verwendete `celist.yaml` (ein fehlendes `l`), die Datei in diesem Repository heißt jedoch `cellist.yaml`.
+Kompatibilitäts-Hinweis aus älteren Dokumenten: Die frühere Dokumentation verwendete `celist.yaml` (ohne `l`), aber die Datei in diesem Repository ist `cellist.yaml`.
+
+Legacy-Befehl (erhalten):
+
+```bash
+conda env create -f celist.yaml
+```
 
 ### 3. Frontend-Abhängigkeiten installieren
 
@@ -119,9 +192,19 @@ npm install
 cd ..
 ```
 
-### 4. MySQL-Authentifizierung vorbereiten (falls nötig)
+### 4. Laufzeitdaten-Verzeichnisse vorbereiten
 
-Wenn die Root-Authentifizierung socket-basiert ist und den Zugriff der App blockiert, empfehlen ältere Projektdokumente die Umstellung auf Passwortauthentifizierung:
+Die App erwartet einen `data/`-Baum (und `.gitignore` schließt bereits `data` aus).
+
+```bash
+mkdir -p data/{annotation_algorithm,annotation_manual,cropped,dataset,images,models,models_backup,temp,uploads}
+```
+
+Hinweis: [`create_data_folder.py`](create_data_folder.py) existiert, erstellt aber derzeit Verzeichnisse im aktuellen Arbeitsverzeichnis (nicht unter `data/`). Berücksichtigen Sie das bei der Nutzung.
+
+### 5. MySQL-Authentifizierung vorbereiten (falls erforderlich)
+
+Wenn die Root-Authentifizierung socketbasiert ist und den App-Zugriff blockiert, empfiehlt ältere Projektdokumentation, auf Passwortauthentifizierung umzuschalten:
 
 ```bash
 sudo mysql
@@ -134,85 +217,109 @@ FLUSH PRIVILEGES;
 EXIT;
 ```
 
-### 5. Datenbank erstellen und Schema/Daten wiederherstellen
+### 6. Datenbank erstellen und Schema/Daten wiederherstellen
 
 ```bash
 mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS cellist;"
 mysql -u root -p cellist < cellist.sql
 ```
 
-Beispiel aus Legacy-Dokumentation (beibehalten):
+Legacy-Dokumentationsbeispiel (erhalten):
 
 ```sql
 mysql -u root -p cellist < /home/user/cellist.sql
 ```
 
-### 6. MySQL-Zugangsdaten für Laufzeit konfigurieren
+### 7. MySQL-Anmeldeinformationen für die Laufzeit konfigurieren
 
-Der aktuelle Code liest Zugangsdaten aus [`cellist/utils/constants.py`](../cellist/utils/constants.py) (`mysqlconfig` und `mysqlurl`).
+Der aktuelle Code liest Anmeldeinformationen aus [`cellist/utils/constants.py`](cellist/utils/constants.py) (`mysqlconfig` und `mysqlurl`).
 
-Aktuell enthaltene Standardwerte im Code:
+Aktuelle Standardwerte sind derzeit:
 
-- host: `localhost`
-- user: `root`
-- password: `lazeal0626`
+- Host: `localhost`
+- Benutzer: `root`
+- Passwort: `lazeal0626`
 
-Für lokale Sicherheit aktualisieren Sie diese Werte vor dem Einsatz in Ihrer Umgebung.
+Aktualisieren Sie diese Werte aus Sicherheitsgründen vor dem Einsatz in Ihrer Umgebung.
 
-### 7. Laufzeit-Datenverzeichnisse vorbereiten
-
-Die App erwartet eine `data/`-Struktur (und `.gitignore` schließt `data` bereits aus).
+### 8. Optionale Umgebungssanity-Checks
 
 ```bash
-mkdir -p data/{annotation_algorithm,annotation_manual,cropped,dataset,images,models,models_backup,temp,uploads}
+python -V
+python -c "import torch, pyro, tornado, pymysql; print('core imports OK')"
+node -v
+npm -v
 ```
 
-Hinweis: [`create_data_folder.py`](../create_data_folder.py) ist vorhanden, erstellt Verzeichnisse derzeit jedoch im aktuellen Arbeitsverzeichnis (nicht unter `data/`). Berücksichtigen Sie das bei der Nutzung.
+## 🚀 Usage
 
-## 🚀 Verwendung
-
-### Webserver starten
+### Starten des Webservers
 
 ```bash
 python app.py
 ```
 
-Legacy-Startbefehl aus früherer Dokumentation (beibehalten):
+Legacy startup-Befehl aus älteren Dokumenten (erhalten):
 
 ```bash
 python app.py -m cellist
 ```
 
-Standard-Routen des Servers laut Code:
+Server-Standardrouten im Code:
 
 - Haupt-UI: `http://localhost:8887/`
 - 3D-Seite: `http://localhost:8887/3d`
 
-### Typischer Workflow
+### Typischer Arbeitsablauf
 
-1. UI öffnen und anmelden.
-2. Mikroskopiebilder im Bereich „Create Model“ hochladen.
-3. Basisalgorithmus (`Cellpose`) wählen und Modell erstellen.
-4. Backend Bilder slicen und Erkennungen initialisieren lassen.
-5. Gecroppte Bilder laden und Rechteck-Annotationen prüfen/anpassen.
-6. `initialize`-, `pretrain`- und `train`-Zyklen ausführen.
-7. Manuelle Aktualisierungen über `Update Model`/Annotation-Aktionen persistieren.
+1. Öffnen Sie die Benutzeroberfläche und melden Sie sich an.
+2. Laden Sie Mikroskopiebilder aus dem Bereich "Modell erstellen" hoch.
+3. Wählen Sie den Basisalgorithmus (`Cellpose`) und erstellen Sie das Modell.
+4. Lassen Sie das Backend die Bilder in Scheiben schneiden und Initialerkennungen durchführen.
+5. Laden Sie zugeschnittene Bilder, prüfen und passen Sie Rechteckannotation an.
+6. Führen Sie `initialize`, `pretrain` und `train`-Zyklen aus.
+7. Nutzen Sie `Pretrain Stop` / `Stop` (`train-stop`) / `reset`, wenn nötig.
+8. Speichern Sie manuelle Updates über `Update Model`/Annotation-Aktionen.
 
-### Integrierte UI-Login-Zugangsdaten (aktuelles Template-Verhalten)
+### Eingebaute Login-Zugangsdaten der UI (aktuelles Template-Verhalten)
 
-Das Frontend prüft derzeit diese statischen Zugangsdaten clientseitig:
+Das Frontend prüft aktuell diese statischen Zugangsdaten clientseitig:
 
 - `admin` / `admin`
 - `lachlan` / `lachlan`
 - `yanjun` / `yanjun`
 
-Dies ist Prototyp-Verhalten und keine produktionsreife Authentifizierung.
+Dies ist prototypisches Verhalten und keine Produktionsauthentifizierung.
 
-## ⚙️ Konfiguration
+### Von der UI aktuell genutzte API/WebSocket-Schnittstelle
+
+HTTP-Endpunkte:
+
+- `GET /`
+- `GET /3d`
+- `POST /upload/<ws_uuid>`
+- `POST /load_model/<ws_uuid>`
+
+WebSocket-Endpunkt:
+
+- `ws://localhost:8887/websocket/<ws_uuid>`
+
+In WebSocket-Handlern erkannte `data_type`-Aktionsnachrichten:
+
+- `create`
+- `update`
+- `initialize`
+- `pretrain`
+- `pretrain-stop`
+- `train`
+- `train-stop`
+- `reset`
+
+## ⚙️ Configuration
 
 ### Backend und Endpunkte
 
-Konfiguriert in [`app.py`](../app.py):
+Konfiguriert in [`app.py`](app.py):
 
 - Port: `8887`
 - Routen:
@@ -225,13 +332,45 @@ Konfiguriert in [`app.py`](../app.py):
 ### Modell-/Datenverhalten
 
 - Thread-Pool-Größe ist `max_workers=64`.
-- Bild-Tiles sind standardmäßig `256x256`.
-- Cellpose-Initialisierung verwendet `model_type='nuclei'` und `gpu=True`.
-- Training und Pretraining laufen asynchron über WebSocket-getriggerte Aktionen.
+- Bildkacheln haben standardmäßig `256x256`.
+- Cellpose-Initialisierung nutzt `model_type='nuclei'` und `gpu=True`.
+- Training und Pretraining laufen asynchron über WebSocket-Trigger-Aktionen.
+- Datenwurzel wird aus dem aktuellen Arbeitsverzeichnis als `<repo>/data` aufgelöst.
 
-## 🧪 Beispiele
+### Datenbank-/Laufzeitkonstanten
 
-### Beispiel: Form einer WebSocket-Create-Nachricht
+Aus [`cellist/utils/constants.py`](cellist/utils/constants.py):
+
+- `dataroot = os.path.join(curdir, "data")`
+- `mysqlconfig` enthält die Schlüssel host/user/password
+- `mysqlurl` zielt auf Datenbankname `cellist`
+
+### Frontend-Abhängigkeitsübersicht
+
+Aus [`statics/package.json`](statics/package.json):
+
+- `bootstrap`
+- `bootstrap-icons`
+- `jquery`
+- `jquery-ui` / `jquery-ui-dist`
+- `three`
+- `blueimp-file-upload`
+
+### Conda-Umgebungs-Highlights
+
+Aus [`cellist.yaml`](cellist.yaml):
+
+- Python `3.8.12`
+- PyTorch `1.12.0`
+- CUDA Toolkit `11.3.1`
+- Tornado `6.1`
+- Cellpose `0.7.2` (pip)
+- Pyro (`pyro-ppl==1.8.1`)
+- PyMySQL + SQLAlchemy
+
+## 🧪 Examples
+
+### Beispiel: WebSocket create-Nachrichtenstruktur
 
 ```json
 {
@@ -247,7 +386,7 @@ Konfiguriert in [`app.py`](../app.py):
 }
 ```
 
-### Beispiel: WebSocket-Update für manuelle Annotation
+### Beispiel: Manuelle Aktualisierung einer WebSocket-Annotation
 
 ```json
 {
@@ -259,7 +398,7 @@ Konfiguriert in [`app.py`](../app.py):
 }
 ```
 
-### Beispiel: Model-Load-Request
+### Beispiel: Modellladeanfrage
 
 ```bash
 curl -X POST http://localhost:8887/load_model/any \
@@ -267,71 +406,117 @@ curl -X POST http://localhost:8887/load_model/any \
   -d "cursor=0"
 ```
 
-## 📚 Von Forschung inspiriert
+### Beispiel: Minimaler lokaler Startablauf
 
-Lazeal Cellist ist von wegweisender Forschung im Deep Learning inspiriert, darunter:
+```bash
+conda env create -f cellist.yaml
+conda activate cellist
+cd statics && npm install && cd ..
+mkdir -p data/{annotation_algorithm,annotation_manual,cropped,dataset,images,models,models_backup,temp,uploads}
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS cellist;"
+mysql -u root -p cellist < cellist.sql
+python app.py
+```
+
+## 📚 Inspired by Research
+
+Lazeal Cellist wurde durch hochmoderne Forschung im Deep Learning inspiriert, unter anderem durch:
 
 1. "Attend, Infer, Repeat: Fast Scene Understanding with Generative Models"
 2. "Spatially Invariant Attend, Infer, Repeat"
 3. "Faster Attend-Infer-Repeat with Tractable Probabilistic Models"
 
-Diese Arbeiten liefern wertvolle Erkenntnisse, die die Entwicklung der Algorithmen und Methodik unserer Plattform geprägt haben.
+Diese Arbeiten liefern wichtige Einblicke, die die Entwicklung der Algorithmen und Methoden unserer Plattform maßgeblich geprägt haben.
 
-(Hinweis: Für exakte Zitation bitte direkt auf die Originalarbeiten verweisen.)
+(Hinweis: Für eine korrekte Zitierung wenden Sie sich bitte direkt an die Originalarbeiten.)
 
-## 🧭 Entwicklungshinweise
+## 🧭 Development Notes
 
-- Zentrale Modellklassen liegen unter `cellist/` (`ModelD2Init`, `ModelD2Pretrain`).
-- Die Hauptlogik der interaktiven UI ist direkt in `templates/cellist.html` eingebettet.
-- SQL-Schema und Seed-ähnliche Daten befinden sich in `cellist.sql`.
-- Notebooks unter `notebooks/` und `polygon_sample/` dienen als explorative Referenzen.
-- Im Repository-Root gibt es derzeit keine dedizierte automatisierte Test-Suite oder CI-Konfiguration.
+- Kernmodell-Klassen befinden sich unter `cellist/` (`ModelD2Init`, `ModelD2Pretrain`).
+- Die Hauptlogik der interaktiven UI steckt direkt in `templates/cellist.html`.
+- SQL-Schema und Seed-Daten befinden sich in `cellist.sql`.
+- Notebooks in `notebooks/` und `polygon_sample/` bieten explorative Referenzen.
+- Erweiterte Plattform-/Modellnotizen finden Sie in [`LazealCellist Documentation.md`](LazealCellist%20Documentation.md).
+- Im Repository-Root existiert derzeit keine dedizierte automatisierte Test-Suite oder CI-Konfiguration.
 
-## 🧯 Fehlerbehebung
+### Annahmen und aktuelle Einschränkungen
 
-| Symptom | Empfohlene Prüfungen |
+- Dieses Repository richtet sich offenbar zunächst auf lokale, forschungsorientierte Nutzung.
+- Einige Codepfade gehen von GPU-Verfügbarkeit (`cuda:0`) aus.
+- Authentifizierung und Geheimnisverwaltung befinden sich auf Prototyp-Niveau.
+- 3D-Oberflächen sind vorhanden, der dominante Trainingsworkflow bleibt jedoch 2D-orientiert und kachelbasiert.
+
+## 🧯 Troubleshooting
+
+| Symptom | Empfohlene Überprüfung |
 |---|---|
-| `ModuleNotFoundError` oder Importprobleme | Prüfen, ob `conda activate cellist` vor `python app.py` ausgeführt wurde. |
-| UI rendert ohne Styling/Skripte | `npm install` in `statics/` ausführen und sicherstellen, dass `statics/node_modules` existiert. |
-| MySQL access denied | Benutzername/Passwort in `cellist/utils/constants.py` und MySQL-Plugin/Auth-Modus prüfen. |
-| App startet, aber Modellaktionen schlagen fehl | CUDA/GPU-Verfügbarkeit prüfen; aktuelle Pfade setzen CUDA voraus (`torch.device('cuda:0')`, Cellpose `gpu=True`). |
-| Upload erfolgreich, aber keine Tiles/Modelle sichtbar | Sicherstellen, dass `data/`-Unterverzeichnisse existieren und beschreibbar sind. |
+| `ModuleNotFoundError` oder Importprobleme | Stellen Sie sicher, dass `conda activate cellist` vor dem Start von `python app.py` aktiv ist. |
+| UI ohne Styling/Skripte | Führen Sie `npm install` in `statics/` aus und prüfen Sie, dass `statics/node_modules` existiert. |
+| MySQL-Zugriff verweigert | Überprüfen Sie den Benutzernamen/Passwort in `cellist/utils/constants.py` und den MySQL-Plugin-/Auth-Modus. |
+| App startet, aber Modellaktionen schlagen fehl | Prüfen Sie CUDA/GPU-Verfügbarkeit; aktuelle Pfade gehen von CUDA aus (`torch.device('cuda:0')`, Cellpose `gpu=True`). |
+| Upload erfolgreich, aber keine Kacheln/Modelle sichtbar | Stellen Sie sicher, dass die Unterverzeichnisse unter `data/` existieren und beschreibbar sind. |
+| REST/WebSocket-Anfragefehler | Prüfen Sie, ob der Server auf `http://localhost:8887` läuft und die Payload-Schlüssel den aktuellen Template-Namen entsprechen. |
+| `FileNotFoundError` unter `data/` | Starten Sie die App vom Repository-Root aus, damit relative Pfade konsistent aufgelöst werden. |
 
-## 🗺️ Roadmap
+### Schnelle Diagnostik
 
-Die folgenden Punkte sind aus bestehender Projektdokumentation/TODO-Notizen übernommen und neu geordnet:
+```bash
+# Python-Umgebung und Schlüsselimporte prüfen
+python -c "import torch, pyro, tornado, pymysql; print('imports ok')"
 
-- Polygon sample: Polygon- statt Rechteck-Annotation verwenden.
+# Sicherstellen, dass Serverport nach dem Start offen ist
+ss -ltnp | rg 8887
+
+# MySQL-Konnektivität prüfen
+mysql -u root -p -e "SHOW DATABASES LIKE 'cellist';"
+```
+
+## 🛣️ Roadmap
+
+Die folgenden Punkte wurden aus bestehender Projektdokumentation/TODO-Notizen übernommen und organisiert:
+
+- Polygon Sample: Verwenden Sie Polygonen statt Rechteckannotation.
 - Modell für `float32`-Verhalten bei sehr kleinen/großen Werten optimieren.
-- Modellgröße, wo möglich, reduzieren.
-- Robustheit mit Ansätzen wie Transformer-/stable-diffusion-inspirierten Komponenten verbessern.
-- Basis-Modelloptionen (Threshold, Cellpose) und Ziel-Modelloptionen (AIR, Transformer, SD) ergänzen.
-- Interface-Optimierung (einschließlich Mehrfachauswahl).
-- Backend-Optimierung (einschließlich verbessertem Speicher-/Cache-Handling).
-- Leicht nutzbares Packaging mit minimaler DB-Konfiguration (z. B. SQLite-Option).
+- Modellgröße wenn möglich verkleinern.
+- Robustheit mit Ansätzen wie Transformer-/Stable-Diffusion-inspirierten Komponenten verbessern.
+- Basis-Modelloptionen ergänzen (Threshold, Cellpose) und Zielmodell-Optionen (AIR, Transformer, SD).
+- Interface-Optimierung (inkl. Mehrfachauswahl).
+- Backend-Optimierung (inkl. verbessertem Speicher-/Cache-Handling).
+- Einfache Verpackung mit minimaler DB-Konfiguration (z. B. SQLite-Option).
 
-## 🤝 Mitwirken
+## 🤝 Contributing
 
 ### Zu Lazeal Cellist beitragen
 
-Lazeal Cellist ist ein Open-Source-Projekt, und wir freuen uns über Beiträge von allen, unabhängig vom Erfahrungsniveau. Besonders willkommen sind Beiträge, die:
+Lazeal Cellist ist ein Open-Source-Projekt, und wir freuen uns über Beiträge von allen, unabhängig vom Erfahrungsstand. Wir begrüßen Beiträge, die:
 
-- Algorithmische Effizienz und Performance verbessern
-- Benutzeroberfläche und Nutzererlebnis verbessern
-- Dokumentation und Beispiele erweitern
-- Bugs beheben und Systemstabilität verbessern
+- die algorithmische Effizienz und Leistung verbessern
+- die Benutzeroberfläche und Nutzererfahrung verbessern
+- die Dokumentation und Beispiele erweitern
+- Fehler beheben und die Systemstabilität erhöhen
 
-Bevor Sie mit einem Beitrag beginnen, besprechen Sie die gewünschte Änderung bitte zuerst über ein Issue. Das hilft bei der Koordination und vermeidet doppelte oder widersprüchliche Arbeit.
+Bevor Sie mit einem Beitrag beginnen, besprechen Sie die gewünschte Änderung bitte zuerst über ein Issue. Das hilft, Doppelarbeit zu vermeiden und Konflikte zu reduzieren.
 
-Weitere Informationen für den Einstieg finden Sie in den Contribution-Richtlinien.
+Weitere Informationen zum Einstieg finden Sie in den Beitragshinweisen.
 
-Zusätzliche Contribution-Dokumente im Repository:
+Zusätzliche Dokumentation für Beiträge:
 
-- [Contribution Guidelines](../CONTRIBUTING.md)
-- [Pull Request Template](../PULL_REQUEST_TEMPLATE.md)
+- [Contribution Guidelines](CONTRIBUTING.md)
+- [Pull Request Template](PULL_REQUEST_TEMPLATE.md)
 
-## 📄 Lizenz
+## 🙏 Acknowledgements
 
-Dieses Projekt ist unter der MIT License lizenziert. Weitere Informationen finden Sie in der [LICENSE](https://chat.openai.com/LICENSE)-Datei in diesem Repository.
+- Das Konzept und die Umsetzung von Lazeal Cellist beziehen sich stark auf die oben genannten AIR/SPAIR-Forschungsansätze.
+- Das Repository enthält historische/Legacy-Dokumentation und Befehle, die bewusst für die Kontinuität mit früherer Projektnutzung beibehalten wurden.
 
-Hinweis zum Repository-Status: In diesem Checkout ist derzeit keine `LICENSE`-Datei im Root vorhanden. Die obige Zeile wird als kanonische Projektabsicht aus der vorherigen README beibehalten; eine lokale `LICENSE`-Datei kann bei Bedarf in einem Folge-Change ergänzt werden.
+## ❤️ Support
+
+| Donate | PayPal | Stripe |
+|---|---|---|
+| [![Donate](https://img.shields.io/badge/Donate-LazyingArt-0EA5E9?style=for-the-badge&logo=ko-fi&logoColor=white)](https://chat.lazying.art/donate) | [![PayPal](https://img.shields.io/badge/PayPal-RongzhouChen-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/RongzhouChen) | [![Stripe](https://img.shields.io/badge/Stripe-Donate-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
+
+## 📄 License
+
+Dieses Projekt steht unter der MIT-Lizenz. Weitere Informationen finden Sie in der Datei [LICENSE](LICENSE) in diesem Repository.
+
+Hinweis zum Repository-Status: In diesem Checkout ist derzeit keine `LICENSE`-Datei im Root vorhanden. Die obige Zeile ist aus der bisherigen README übernommen; fügen Sie in einem Folgeschritt eine lokale `LICENSE`-Datei hinzu, falls gewünscht.
