@@ -2,6 +2,7 @@
 
 
 
+
 [![LazyingArt banner](https://github.com/lachlanchen/lachlanchen/raw/main/figs/banner.png)](https://github.com/lachlanchen/lachlanchen/blob/main/figs/banner.png)
 
 <h1 align="center">Lazeal Cellist</h1>
@@ -11,13 +12,13 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-research%20prototype-blue" alt="Statut" />
-  <img src="https://img.shields.io/badge/backend-Tornado-00A3E0" alt="Backend" />
-  <img src="https://img.shields.io/badge/ML-PyTorch%20%2B%20Pyro%20%2B%20Cellpose-orange" alt="ML" />
-  <img src="https://img.shields.io/badge/database-MySQL-4479A1" alt="DB" />
-  <img src="https://img.shields.io/badge/platform-Linux-lightgrey" alt="Plateforme" />
-  <img src="https://img.shields.io/badge/UI-Bootstrap%20%2B%20jQuery-7952B3" alt="UI" />
-  <img src="https://img.shields.io/badge/port-8887-success" alt="Port" />
+  <img src="https://img.shields.io/badge/status-research%20prototype-blue?style=for-the-badge" alt="Statut" />
+  <img src="https://img.shields.io/badge/backend-Tornado-00A3E0?style=for-the-badge" alt="Backend" />
+  <img src="https://img.shields.io/badge/ML-PyTorch%20%2B%20Pyro%20%2B%20Cellpose-orange?style=for-the-badge" alt="ML" />
+  <img src="https://img.shields.io/badge/database-MySQL-4479A1?style=for-the-badge" alt="DB" />
+  <img src="https://img.shields.io/badge/platform-Linux-lightgrey?style=for-the-badge" alt="Plateforme" />
+  <img src="https://img.shields.io/badge/UI-Bootstrap%20%2B%20jQuery-7952B3?style=for-the-badge" alt="UI" />
+  <img src="https://img.shields.io/badge/port-8887-success?style=for-the-badge" alt="Port" />
 </p>
 
 <p align="center">
