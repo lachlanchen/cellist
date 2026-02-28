@@ -27,18 +27,20 @@
   <a href="#-贡献"><img src="https://img.shields.io/badge/Build-Contributing-6366F1?style=flat-square" alt="Contributing" /></a>
 </p>
 
+## 🎬 预览
+
 ![Screenshot 2D](screenshot2d.png)
 
 ## Lazeal Cellist：您的高效3D细胞检测与分析平台
 
-欢迎使用 Lazeal Cellist，这是一款面向3D显微镜图像的全面、轻量且高效的细胞检测、分割与分析平台。
+欢迎使用 Lazeal Cellist，这是一款面向 3D 显微镜图像的、完整且高效的细胞检测、分割与分析平台。
 
-本平台通过无监督学习、阈值方法以及 Cellpose 等前沿算法实现细胞检测。Lazeal Cellist 还提供直观的交互式界面，帮助用户细化检测结果。这些精修后的结果会回流到半监督学习网络，实现模型持续提升。
+本平台采用无监督学习、阈值方法和如 Cellpose 等先进算法来识别细胞。Lazeal Cellist 还提供直观的交互界面，让用户可以细化检测结果。细化后的结果会反馈给半监督学习网络，持续提升模型表现。
 
-Lazeal Cellist 的优势在于提供高效的3D模型，训练和精修所需工作量较低，适合科研人员、研究人员和业余爱好者。
+Lazeal Cellist 的优势在于其高效的 3D 模型，只需极少的训练与细化工作量，适合科研人员、研究者和爱好者使用。
 
 > ℹ️ **范围说明**
-> 项目愿景与UI包含3D概念（`/3d`、`templates/cellist_3d.html`），但当前代码中的主要训练流程仍以2D切片 + 精修为主。
+> 项目愿景与界面中包含 3D 概念（`/3d`、`templates/cellist_3d.html`），但当前代码的主要训练流程仍是 2D 切片 + 细化。
 
 ---
 
@@ -59,18 +61,18 @@ Lazeal Cellist 的优势在于提供高效的3D模型，训练和精修所需工
 - [贡献](#-贡献)
 - [致谢](#-致谢)
 - [Support](#-support)
-- [许可证](#-许可证)
+- [许可证](#-license)
 
 ## 🔍 概览
 
-Lazeal Cellist 是一个基于 Python/Tornado 的显微图像工作流 Web 平台，支持：
+Lazeal Cellist 是一个面向显微镜影像流程的 Python/Tornado Web 平台，具有以下能力：
 
-- 浏览器中上传、创建模型与编辑标注。
+- 浏览器端上传、模型创建与标注编辑。
 - 算法辅助初始化（Cellpose nuclei 模式）。
-- 通过 WebSocket 动作（`create`、`initialize`、`pretrain`、`pretrain-stop`、`train`、`train-stop`、`update`、`reset`）进行人机协同迭代精修。
+- 通过 WebSocket 动作（`create`、`initialize`、`pretrain`、`pretrain-stop`、`train`、`train-stop`、`update`、`reset`）进行人机协同的迭代式细化。
 - 数据库持久化存储模型、图像切片和标注。
 
-> ℹ️ 当前行为说明：尽管项目愿景与UI包含3D概念（`/3d`、`templates/cellist_3d.html`），当前代码中的主训练流程主要仍是2D切片 + 模型精修。
+> ℹ️ 当前行为说明：尽管项目愿景与 UI 包含 3D 概念（`/3d`、`templates/cellist_3d.html`），当前代码中的主要训练流程仍以 2D 切片 + 模型细化为主。
 
 ### 快速一览
 
@@ -82,7 +84,7 @@ Lazeal Cellist 是一个基于 Python/Tornado 的显微图像工作流 Web 平�
 | 核心 ML 技术栈 | PyTorch + Pyro + Cellpose |
 | 前端 | Bootstrap、jQuery、jQuery UI、Three.js、blueimp-file-upload |
 | 推理初始化 | Cellpose（`model_type='nuclei'`，`gpu=True`） |
-| 打包状态 | 研究原型（无 `pyproject.toml`/`setup.py`） |
+| 打包状态 | 研究原型（未包含 `pyproject.toml`/`setup.py`） |
 | 测试/CI 状态 | 仓库根目录未配置专用自动化测试套件或 CI |
 
 ### 文档语言
@@ -102,17 +104,17 @@ Lazeal Cellist 是一个基于 Python/Tornado 的显微图像工作流 Web 平�
 
 ## ✨ 核心特性
 
-- **无监督3D细胞检测**：使用先进机器学习技术，在3D显微镜图像中识别细胞。
-- **交互式结果精修界面**：通过直观友好的界面反复细化检测结果。
-- **高效半监督学习网络**：利用精修结果持续提升模型表现。
-- **细胞分割与分析**：除检测外，还可进行更深入的分割和分析。
+- **无监督 3D 细胞检测**：使用先进的机器学习技术，在 3D 显微镜图像中识别细胞。
+- **交互式结果细化界面**：通过直观友好的界面细化检测结果。
+- **高效半监督学习网络**：利用细化结果持续提升模型表现。
+- **细胞分割与分析**：不仅支持检测，还支持更深度的分割与特征分析。
 
-当前代码中已具备的附加实现特性：
+当前实现中还具备的附加特性：
 
-- 在 `8887` 端口运行的 Tornado REST + WebSocket 服务器（`app.py`）。
-- 自动图像切片（默认 `256x256`）用于模型摄入。
-- 以 dump 形式提供 MySQL schema：[`cellist.sql`](cellist.sql)。
-- 前端栈包含 Bootstrap、jQuery、jQuery UI、Three.js、blueimp-file-upload。
+- 基于 Tornado 的 REST + WebSocket 服务器（`app.py`），端口为 `8887`。
+- 自动影像切片（默认 `256x256`）用于模型输入。
+- MySQL schema 以导出文件形式提供：[`cellist.sql`](cellist.sql)。
+- 前端技术栈包含 Bootstrap、jQuery、jQuery UI、Three.js、blueimp-file-upload。
 - 通过线程池异步执行模型任务（`max_workers=64`）。
 
 ## 🗂️ 项目结构
@@ -124,22 +126,22 @@ cellist/
 │   ├── model_init.py                    # 2D 主模型类与训练流程
 │   ├── model_pretrain.py                # 预训练变体
 │   ├── model_2d_components.py           # 编码器/解码器/SPAIR 组件
-│   ├── model_2d_utilities.py            # 数据库驱动的模型元数据与变换
+│   ├── model_2d_utilities.py            # 基于数据库的模型元数据 + transforms
 │   ├── image_preprocessing.py           # 切片/拼接工具
-│   └── utils/constants.py               # 运行路径 + MySQL 配置
+│   └── utils/constants.py               # 运行时路径 + MySQL 配置
 ├── templates/
-│   ├── cellist.html                     # 主要2D界面
-│   └── cellist_3d.html                  # 3D界面变体（原型）
-├── statics/                             # 前端资源与 npm 依赖
+│   ├── cellist.html                     # 主要 2D 界面
+│   └── cellist_3d.html                  # 3D 界面变体/原型
+├── statics/                             # 前端资源和 npm 依赖
 │   ├── package.json
 │   └── node_modules/
 ├── i18n/                                # 翻译版 README
 ├── notebooks/                           # 探索型笔记本
 ├── polygon_sample/                      # 多边形标注实验
-├── figs/                                # 品牌素材
+├── figs/                                # 品牌图形素材
 ├── cellist.sql                          # MySQL schema 与数据导出
-├── cellist.yaml                         # Conda 环境定义
-├── create_data_folder.py                # 旧式数据目录创建脚本
+├── cellist.yaml                         # Conda 环境规范
+├── create_data_folder.py                # 旧版数据文件夹创建脚本
 ├── CONTRIBUTING.md
 ├── PULL_REQUEST_TEMPLATE.md
 ├── LazealCellist Documentation.md       # 扩展架构/TODO 说明
@@ -150,35 +152,34 @@ cellist/
 
 | 需求 | 说明 |
 |---|---|
-| 操作系统 | 推荐 Linux（以下命令按 Linux shell 行为执行）。 |
-| Python/Conda | 需要 Conda，可基于 [`cellist.yaml`](cellist.yaml) 创建环境。 |
-| 数据库 | 本地 `localhost` 上需运行 MySQL，并存在 `cellist` 数据库。 |
-| GPU | 当前代码路径强烈建议/预期在 NVIDIA/CUDA 环境下运行。 |
+| 操作系统 | 建议使用 Linux（下列命令按 Linux shell 行为执行）。 |
+| Python/Conda | 可用 Conda，用于依据 [`cellist.yaml`](cellist.yaml) 创建环境。 |
+| 数据库 | 本地运行 MySQL，`localhost` 上需存在 `cellist` 数据库。 |
+| GPU | 现有代码路径强烈推荐/默认预期使用 NVIDIA/CUDA。 |
 | Node.js + npm | 需要用于安装 `statics/node_modules` 前端依赖。 |
-| 磁盘写权限 | 运行时需要 `<repo>/data` 下的数据写入权限。 |
+| 磁盘写权限 | 运行时需在 `<repo>/data` 下有写入权限。 |
 
 ## 🛠️ 安装
 
 ### 1. 克隆并进入仓库
 
 ```bash
-
 git clone <your-fork-or-upstream-url>
 cd cellist
 ```
 
 ### 2. 创建 Python 环境
 
-使用仓库文件名 `cellist.yaml`：
+使用仓库中的文件名 `cellist.yaml`：
 
 ```bash
 conda env create -f cellist.yaml
 conda activate cellist
 ```
 
-兼容性说明保留于旧文档：先前文档曾使用 `celist.yaml`（缺少一个 `l`），但本仓库文件为 `cellist.yaml`。
+兼容性说明保留自旧文档：旧文档曾使用 `celist.yaml`（少了一个 `l`），但本仓库中的文件为 `cellist.yaml`。
 
-保留的旧命令：
+保留的历史命令：
 
 ```bash
 conda env create -f celist.yaml
@@ -194,17 +195,17 @@ cd ..
 
 ### 4. 准备运行时数据目录
 
-应用需要 `data/` 目录树（`.gitignore` 已经排除了 `data`）。
+应用期望存在 `data/` 目录树（`.gitignore` 已将 `data` 排除）。
 
 ```bash
 mkdir -p data/{annotation_algorithm,annotation_manual,cropped,dataset,images,models,models_backup,temp,uploads}
 ```
 
-说明：[`create_data_folder.py`](create_data_folder.py) 存在，但目前会在当前工作目录创建目录，而非 `data/` 下。
+说明：[`create_data_folder.py`](create_data_folder.py) 已存在，但当前会在当前工作目录下创建目录（不是在 `data/` 下），如使用请注意。
 
 ### 5. 准备 MySQL 认证（如需要）
 
-若 root 认证为 socket 模式且拦截应用访问，旧版文档建议改为密码认证：
+如果 root 认证是基于 socket 且拦截了应用访问，旧版文档建议切换为密码认证：
 
 ```bash
 sudo mysql
@@ -224,25 +225,25 @@ mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS cellist;"
 mysql -u root -p cellist < cellist.sql
 ```
 
-保留旧文档示例（用于参考）：
+保留的历史文档示例（仅作参考）：
 
-```bash
+```sql
 mysql -u root -p cellist < /home/user/cellist.sql
 ```
 
 ### 7. 配置运行时 MySQL 凭据
 
-当前代码从 [`cellist/utils/constants.py`](cellist/utils/constants.py) 读取配置（`mysqlconfig` 与 `mysqlurl`）。
+当前代码从 [`cellist/utils/constants.py`](cellist/utils/constants.py) 读取凭据（`mysqlconfig` 与 `mysqlurl`）。
 
-当前代码默认值为：
+当前默认值如下：
 
 - host: `localhost`
 - user: `root`
 - password: `lazeal0626`
 
-为了本地安全性，请在你的环境运行前更新这些值。
+出于本地安全考虑，请在你的环境中运行前更新这些值。
 
-### 8. 可选：环境健康检查
+### 8. 可选：环境自检
 
 ```bash
 python -V
@@ -259,52 +260,52 @@ npm -v
 python app.py
 ```
 
-保留的旧启动命令（来自历史文档）：
+保留的历史启动命令（来自旧文档）：
 
 ```bash
 python app.py -m cellist
 ```
 
-代码中可见的默认路由：
+代码中的默认路由：
 
 - 主界面：`http://localhost:8887/`
 - 3D 页面：`http://localhost:8887/3d`
 
-### 典型工作流
+### 常规流程
 
-1. 打开 UI 并登录。
-2. 在 Create Model 面板上传显微镜图像。
+1. 打开界面并登录。
+2. 在“创建模型”面板上传显微镜图像。
 3. 选择基础算法（`Cellpose`）并创建模型。
-4. 等待后端切片并初始化检测。
-5. 加载裁剪后的图像，审阅并调整矩形标注。
-6. 运行 `initialize`、`pretrain` 与 `train` 周期。
-7. 按需使用 `Pretrain Stop` / `Stop`（`train-stop`）/`reset`。
-8. 通过 `Update Model`/标注动作持久化手动更新。
+4. 让后端切片并初始化检测结果。
+5. 加载裁剪后的图像，审阅/调整矩形标注。
+6. 执行 `initialize`、`pretrain` 与 `train` 周期。
+7. 按需使用 `Pretrain Stop` / `Stop`（`train-stop`）/ `reset`。
+8. 通过 `Update Model`/标注操作持久化手工更新。
 
 ### 内置 UI 登录凭据（当前模板行为）
 
-前端当前在客户端侧检查以下静态凭据：
+前端当前在客户端进行以下静态凭据校验：
 
 - `admin` / `admin`
 - `lachlan` / `lachlan`
 - `yanjun` / `yanjun`
 
-这属于原型级行为，不是生产级认证方案。
+这是原型行为，不属于生产环境认证方案。
 
-### API/WebSocket 接口（UI 当前使用）
+### UI 当前使用的 API/Socket 接口
 
-HTTP 接口：
+HTTP 端点：
 
 - `GET /`
 - `GET /3d`
 - `POST /upload/<ws_uuid>`
 - `POST /load_model/<ws_uuid>`
 
-WebSocket 接口：
+WebSocket 端点：
 
 - `ws://localhost:8887/websocket/<ws_uuid>`
 
-WebSocket 处理器中已识别的 `data_type` 动作：
+WebSocket handler 中已识别的 `data_type` 动作消息：
 
 - `create`
 - `update`
@@ -319,7 +320,7 @@ WebSocket 处理器中已识别的 `data_type` 动作：
 
 ### 后端与端点
 
-配置位于 [`app.py`](app.py)：
+配置于 [`app.py`](app.py)：
 
 - 端口：`8887`
 - 路由：
@@ -329,13 +330,13 @@ WebSocket 处理器中已识别的 `data_type` 动作：
   - `/load_model/.*`
   - `/websocket/(.*)`
 
-### 模型/数据行为
+### 模型与数据行为
 
 - 线程池大小为 `max_workers=64`。
 - 默认图像切片大小为 `256x256`。
 - Cellpose 初始化使用 `model_type='nuclei'` 与 `gpu=True`。
-- 训练和预训练通过 WebSocket 触发动作异步执行。
-- 数据根路径从当前工作目录解析为 `<repo>/data`。
+- 训练与预训练通过 WebSocket 触发的动作异步执行。
+- 数据根目录使用当前工作目录解析为 `<repo>/data`。
 
 ### 数据库/运行时常量
 
@@ -345,7 +346,7 @@ WebSocket 处理器中已识别的 `data_type` 动作：
 - `mysqlconfig` 包含 host/user/password 字段
 - `mysqlurl` 指向数据库 `cellist`
 
-### 前端依赖快照
+### 前端依赖清单
 
 来自 [`statics/package.json`](statics/package.json)：
 
@@ -370,7 +371,7 @@ WebSocket 处理器中已识别的 `data_type` 动作：
 
 ## 🧪 示例
 
-### 示例：WebSocket create 消息结构
+### 示例：WebSocket 创建消息结构
 
 ```json
 {
@@ -386,7 +387,7 @@ WebSocket 处理器中已识别的 `data_type` 动作：
 }
 ```
 
-### 示例：WebSocket 手动标注更新
+### 示例：WebSocket 手工标注更新
 
 ```json
 {
@@ -406,7 +407,7 @@ curl -X POST http://localhost:8887/load_model/any \
   -d "cursor=0"
 ```
 
-### 示例：最小端到端本地启动
+### 示例：最小本地启动流程
 
 ```bash
 conda env create -f cellist.yaml
@@ -420,103 +421,99 @@ python app.py
 
 ## 📚 研究启发
 
-Lazeal Cellist 受到前沿深度学习研究的启发，包括：
+Lazeal Cellist 借鉴了前沿的深度学习研究，包括：
 
 1. "Attend, Infer, Repeat: Fast Scene Understanding with Generative Models"
 2. "Spatially Invariant Attend, Infer, Repeat"
 3. "Faster Attend-Infer-Repeat with Tractable Probabilistic Models"
 
-这些工作为我们平台的算法与方法论提供了重要的设计思路。
+这些成果为平台的算法和方法设计提供了重要参考。
 
-（说明：如需准确引用，请直接参考原始论文。）
+（注：如需准确引用，请直接参考原始论文。）
 
 ## 🧭 开发说明
 
 - 核心模型类位于 `cellist/`（`ModelD2Init`、`ModelD2Pretrain`）。
-- 主要交互式 UI 逻辑直接嵌入 `templates/cellist.html`。
-- SQL schema 与种子风格数据位于 `cellist.sql`。
-- `notebooks/` 与 `polygon_sample/` 提供探索性参考。
-- 扩展的平台/模型说明位于 [`LazealCellist Documentation.md`](LazealCellist%20Documentation.md)。
-- 仓库根目录目前没有专用自动化测试套件或 CI 配置。
+- 主要交互式 UI 逻辑直接嵌在 `templates/cellist.html` 中。
+- SQL schema 与类似种子数据位于 `cellist.sql`。
+- `notebooks/` 与 `polygon_sample/` 中的笔记本可作为探索参考。
+- 扩展的平台/模型说明见 [`LazealCellist Documentation.md`](LazealCellist%20Documentation.md)。
+- 仓库根目录目前没有独立的自动化测试套件或 CI 配置。
 
-### 当前假设与约束
+### 假设与当前约束
 
-- 仓库似乎优先面向本地研究场景使用。
-- 某些代码路径默认可用 GPU（`cuda:0`）。
-- 鉴权与密钥管理仍为原型级。
-- 3D 界面已有实现，但主训练流程仍是以2D切片为中心。
+- 本仓库似乎优先服务于本地研究用途。
+- 某些代码路径假设 GPU（`cuda:0`）可用。
+- 认证与密钥管理处于原型级别。
+- 3D 界面已存在，但主训练流程仍以 2D 切片为主。
 
 ## 🧯 故障排查
 
-| 症状 | 建议检查 |
+| 症状 | 建议排查 |
 |---|---|
-| `ModuleNotFoundError` 或导入问题 | 确认运行 `python app.py` 前已执行 `conda activate cellist`。 |
-| UI 有渲染但无样式/脚本 | 在 `statics/` 下执行 `npm install`，确认 `statics/node_modules` 已存在。 |
-| MySQL access denied | 检查 `cellist/utils/constants.py` 中的用户名/密码和 MySQL plugin/auth 模式。 |
-| 应用已启动但模型动作失败 | 检查 CUDA/GPU 可用性；当前路径默认使用 CUDA（`torch.device('cuda:0')`、Cellpose `gpu=True`）。 |
-| 上传成功但无 tiles/models | 确认 `data/` 子目录存在且可写。 |
-| REST/WebSocket 请求报错 | 确认服务运行于 `http://localhost:8887`，且请求 payload 键名与当前模板一致。 |
-| `data/` 下报 `FileNotFoundError` | 从仓库根目录启动应用，以保证相对路径解析一致。 |
+| `ModuleNotFoundError` 或导入报错 | 确认运行 `python app.py` 前已执行 `conda activate cellist`。 |
+| UI 无样式或脚本未加载 | 在 `statics/` 内执行 `npm install`，并确认存在 `statics/node_modules`。 |
+| MySQL 被拒绝访问 | 检查 `cellist/utils/constants.py` 中的用户名/密码与 MySQL 插件/认证模式。 |
+| 应用启动但模型动作失败 | 检查 CUDA/GPU 可用性；当前路径默认假设使用 CUDA（`torch.device('cuda:0')`，Cellpose `gpu=True`）。 |
+| 上传成功但无切片/模型出现 | 确保 `data/` 各子目录存在且可写。 |
+| REST/WebSocket 请求报错 | 确认服务运行在 `http://localhost:8887`，且请求载荷字段与当前模板名称一致。 |
+| `data/` 下出现 `FileNotFoundError` | 请从仓库根目录启动应用，以保证相对路径一致解析。 |
 
 ### 快速诊断
 
 ```bash
-# 验证 Python 环境和关键导入
+# 验证 Python 环境与关键导入
 python -c "import torch, pyro, tornado, pymysql; print('imports ok')"
 
-# 确认服务启动后端口是否监听
+# 验证启动后端口是否开放
 ss -ltnp | rg 8887
 
-# 检查 MySQL 连通性
+# 检查 MySQL 连接
 mysql -u root -p -e "SHOW DATABASES LIKE 'cellist';"
 ```
 
 ## 🛣️ 路线图
 
-以下条目来源于现有项目文档/TODO，并按现状整理：
+以下条目保留自现有项目文档/TODO 说明：
 
-- Polygon sample：使用 polygon 替代 rectangle 标注。
-- 在极小/极大值场景下优化 `float32` 行为。
-- 尽可能减小模型体积。
-- 使用 Transformer / stable-diffusion 启发组件等方法提升鲁棒性。
-- 增加基模型选项（Threshold、Cellpose）与目标模型选项（AIR、Transformer、SD）。
-- 界面优化（含多选）。
+- 多边形样例：改用 polygon 代替矩形标注。
+- 针对非常小/非常大数值优化 `float32` 行为。
+- 尽可能缩小模型规模。
+- 借鉴 Transformer / stable-diffusion 等思路提升鲁棒性。
+- 增加基础模型选项（Threshold、Cellpose）与目标模型选项（AIR、Transformer、SD）。
+- 界面优化（包括多选）。
 - 后端优化（包括更好的内存/缓存处理）。
-- 提供开箱即用的打包方案，减少数据库配置门槛（例如 SQLite 选项）。
+- 提供更易用的打包方案，降低数据库配置门槛（如支持 SQLite 选项）。
 
 ## 🤝 贡献
 
-### 为 Lazeal Cellist 贡献
+### 参与 Lazeal Cellist
 
-Lazeal Cellist 是一个开源项目，欢迎所有人参与，无论经验水平。我们鼓励以下贡献：
+Lazeal Cellist 是开源项目，欢迎各水平的贡献者加入。我们欢迎以下方向的贡献：
 
-- 提升算法效率与性能
-- 改进界面与用户体验
-- 丰富文档与示例
-- 修复缺陷并提高系统稳定性
+- 提升算法效率和性能
+- 改进用户界面与交互体验
+- 扩展文档与示例
+- 修复缺陷并增强系统稳定性
 
-开始前请先通过 issue 讨论你想做的改动，以便协调工作，避免重复或冲突。
+在开始提交更改前，请先在 issue 中讨论你的改动思路。这样有助于协调工作、避免重复或冲突。
 
-更多上手信息请阅读贡献指南。
+如需了解如何开始，请阅读贡献指南。
 
-仓库补充贡献文档：
+补充的仓库贡献文档：
 
 - [Contribution Guidelines](CONTRIBUTING.md)
 - [Pull Request Template](PULL_REQUEST_TEMPLATE.md)
 
 ## 🙏 致谢
 
-- Lazeal Cellist 的概念与实现大量借鉴了上文提到的 AIR/SPAIR 研究脉络。
-- 仓库保留了历史/遗留文档与命令，以便与先前项目使用方式保持连续性。
+- Lazeal Cellist 的概念与实现大量借鉴了上述 AIR/SPAIR 研究体系。
+- 仓库保留了历史和旧版文档与命令，以确保与之前的项目使用方式兼容。
+
+
 
 ## ❤️ Support
 
 | Donate | PayPal | Stripe |
-|---|---|---|
-| [![Donate](https://img.shields.io/badge/Donate-LazyingArt-0EA5E9?style=for-the-badge&logo=ko-fi&logoColor=white)](https://chat.lazying.art/donate) | [![PayPal](https://img.shields.io/badge/PayPal-RongzhouChen-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/RongzhouChen) | [![Stripe](https://img.shields.io/badge/Stripe-Donate-635BFF?style=for-the-badge&logo=stripe&logoColor=white)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
-
-## 📄 许可证
-
-本项目采用 MIT 许可证。更多信息请参考本仓库的 [LICENSE](LICENSE) 文件。
-
-仓库状态说明：当前检出的根目录中暂无 `LICENSE` 文件。上方说明保留自先前 README 作为项目规范意图；如需要可在后续更新中补充本地 `LICENSE` 文件。
+| --- | --- | --- |
+| [![Donate](https://camo.githubusercontent.com/24a4914f0b42c6f435f9e101621f1e52535b02c225764b2f6cc99416926004b7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f446f6e6174652d4c617a79696e674172742d3045413545393f7374796c653d666f722d7468652d6261646765266c6f676f3d6b6f2d6669266c6f676f436f6c6f723d7768697465)](https://chat.lazying.art/donate) | [![PayPal](https://camo.githubusercontent.com/d0f57e8b016517a4b06961b24d0ca87d62fdba16e18bbdb6aba28e978dc0ea21/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f50617950616c2d526f6e677a686f754368656e2d3030343537433f7374796c653d666f722d7468652d6261646765266c6f676f3d70617970616c266c6f676f436f6c6f723d7768697465)](https://paypal.me/RongzhouChen) | [![Stripe](https://camo.githubusercontent.com/1152dfe04b6943afe3a8d2953676749603fb9f95e24088c92c97a01a897b4942/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374726970652d446f6e6174652d3633354246463f7374796c653d666f722d7468652d6261646765266c6f676f3d737472697065266c6f676f436f6c6f723d7768697465)](https://buy.stripe.com/aFadR8gIaflgfQV6T4fw400) |
